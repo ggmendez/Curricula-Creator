@@ -1,4 +1,5 @@
-
+<?php echo $this->Html->addCrumb(__('My Courses'), '/courses'); ?>
+<?php echo $this->Html->addCrumb (__('Add Course')); ?>
 
 <?php echo $this->Html->script('jquery-1.9.1.min.js', false); ?>
 
@@ -11,17 +12,17 @@
         $("#add-button").click(function(event) {
             var id = $globalCounter + 1;
             $globalCounter = $globalCounter + 1;
-            var inputHtml = '<div class="longField required" id="divObjective' + id + 'Description">';
+            var inputHtml = '<li><div class="longField required" id="divObjective' + id + 'Description">';
             inputHtml += '<input class="pepe objective" id="theObjective' + id + 'Description" type="text" required="required" name="data[Objective][' + id + '][description]" />';
             inputHtml += '<a id = Objective' + id + 'Description class="delete-button" >Delete</a>';
-            inputHtml += '</div>';
-            $('#courseObjectives').append(inputHtml);
+            inputHtml += '</div></li>';
+            $('#objectivesList').append(inputHtml);
             event.preventDefault();                
         });
 
-        $("#courseObjectives").delegate(".delete-button", "click", function(event) {
-            if (confirm('Are you sure you want to delete objective?')) {
-                $('#div' + event.target.id).remove();                
+        $("#objectivesList").delegate(".delete-button", "click", function(event) {
+            if (confirm('Are you sure you want to delete objective ' + '#li' + event.target.id + ' ?')) {
+                $('#div' + event.target.id).parent().remove();
             }
             event.preventDefault();
         });
@@ -30,11 +31,12 @@
 
 
 </script>
+
 <div class="courses form">
     <?php echo $this->Form->create('Course'); ?>
 
     <fieldset>
-        <legend><?php echo __('Add Course'); ?></legend>
+        <legend><?php // echo __('Add Course'); ?></legend>
 
         <?php
         $dataPt = $this->Form->input('name', array('label' => 'Course Name:', 'div' => false, 'class' => 'pepe'));
@@ -84,6 +86,14 @@
 
             <?php echo $this->Html->tag('label', '<b>Objectives:&nbsp;</b>'); ?>
             <?php echo $this->Html->link('Add objective', '', array('target' => '_blank', 'id' => 'add-button')); ?>
+            
+            <?php echo $this->Html->tag('br');
+                echo $this->Html->tag('br');
+                ?>
+            
+            <ol id="objectivesList">
+                
+            </ol>
 
 
             <?php // $dataPt = $this->Form->input('Objective.0.description', array('label' => false, 'div' => false, 'class' => 'pepe'));

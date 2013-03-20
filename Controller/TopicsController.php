@@ -10,7 +10,7 @@ App::uses('AppController', 'Controller');
 class TopicsController extends AppController {
     
     public $paginate = array(
-        'limit' => 2500,
+        'limit' => 25,
         
     );
 
@@ -22,11 +22,11 @@ class TopicsController extends AppController {
     public function index() {
         $this->Topic->recursive = 0;
         
-        $subjects = $this->Topic->Unit->Subject->find('all', array(
-            'fields' => array ('Subject.id', 'Subject.name'),
+        $knowledgeAreas = $this->Topic->Unit->KnowledgeArea->find('all', array(
+            'fields' => array ('KnowledgeArea.id', 'KnowledgeArea.name'),
             'recursive' => 0,
         ));
-        $this->set('subjects', $subjects);
+        $this->set('knowledgeAreas', $knowledgeAreas);
 
         $this->set('topics', $this->paginate());
     }
@@ -61,8 +61,12 @@ class TopicsController extends AppController {
                 $this->Session->setFlash(__('The topic could not be saved. Please, try again.'));
             }
         }
+        
+        // TODO: Esta lista de unidades debería ser solo de MIS unidades
         $units = $this->Topic->Unit->find('list');
-        $this->set(compact('units'));
+        
+        $topicTypes = $this->Topic->TopicType->find('list');
+        $this->set(compact('units', 'topicTypes'));
     }
 
     /**

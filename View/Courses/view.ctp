@@ -1,3 +1,6 @@
+<?php echo $this->Html->addCrumb('My Courses', '/courses'); ?>
+<?php echo $this->Html->addCrumb ($course['Course']['name']); ?>
+
 <div class="courses view">
 
     
@@ -12,7 +15,7 @@
 
     <div style="padding-left: 20px;">
 
-        <?php echo $this->Html->tag('b', 'Credits: ') . $course['Course']['credits']; ?>    
+        <?php echo $this->Html->tag('b', 'Credits: ') . $course['Course']['credits']; ?>
         &nbsp;
         <?php echo $this->Html->tag('b', 'Semester: ') . $course['Course']['semester']; ?>
         &nbsp;

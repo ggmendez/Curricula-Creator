@@ -1,17 +1,19 @@
+<?php echo $this->Html->addCrumb('My Study Programs'); ?>
+
 <div class="programs index">
 	<h2><?php echo __('Programs'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort('id'); ?></th>
+			<!--<th><?php // echo $this->Paginator->sort('id'); ?></th>-->
 			<th><?php echo $this->Paginator->sort('name'); ?></th>
-			<th><?php echo $this->Paginator->sort('description'); ?></th>
+			<!--<th><?php // echo $this->Paginator->sort('description'); ?></th>-->
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($programs as $program): ?>
 	<tr>
-		<td><?php echo h($program['Program']['id']); ?>&nbsp;</td>
-		<td><?php echo h($program['Program']['name']); ?>&nbsp;</td>
-		<td><?php echo h($program['Program']['description']); ?>&nbsp;</td>
+		<!--<td><?php // echo h($program['Program']['id']); ?>&nbsp;</td>-->
+		<td style="text-align: left;"><?php echo h($program['Program']['name']); ?>&nbsp;</td>
+		<!--<td><?php // echo h($program['Program']['description']); ?>&nbsp;</td>-->
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $program['Program']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $program['Program']['id'])); ?>

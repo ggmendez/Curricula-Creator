@@ -1,0 +1,103 @@
+<?php echo $this->Html->addCrumb(__('Bodies of knowledge'), '/bodyKnowledges'); ?>
+<?php echo $this->Html->addCrumb(__('Create New Body of knowledge')); ?>
+
+<div class="bodyKnowledges form">
+
+    <?php echo $this->Html->script('jquery-1.9.1.min.js', false); ?>
+
+    <script>
+
+        $(document).ready(function() {
+
+            $globalCounter = 0;
+
+            $("#add-knowledge-area").click(function(event) {
+                var id = $globalCounter + 1;
+                $globalCounter = $globalCounter + 1;
+                var inputHtml = '<li style="margin-bottom: 180px;"><div class="required inputsRow" id="divKnowledgeArea' + id + 'Name" style="height:155px; clear:both;">';
+                inputHtml += '<label for="theKnowledgeArea' + id + 'Name"><?php echo __('Name') . ':' ?></label>';
+                inputHtml += '<input style="width: 63%;" id="theKnowledgeArea' + id + 'Name" type="text" required="required" name="data[KnowledgeArea][' + id + '][name]" />';
+
+                inputHtml += '<input style="width: 40px; float:right;" id="theKnowledgeArea' + id + 'Abbreviation" type="text" required="required" name="data[KnowledgeArea][' + id + '][abbreviation]" />';
+                inputHtml += '<label style="float:right;" for="theKnowledgeArea' + id + 'Abbreviation"><?php echo __('Abbreviation') . ':' ?></label>';
+
+                inputHtml += '<label for="theKnowledgeArea' + id + 'Description" style="clear:both; margin-top: 20px;">Description:</label>';
+                inputHtml += '<textarea id="theKnowledgeArea' + id + 'Description"  rows="3" cols="30" name="data[KnowledgeArea][' + id + '][description]"></textarea>';
+                inputHtml += '</div>';
+
+                inputHtml += '<a id = KnowledgeArea' + id + 'Name class="remove-button" >Remove</a>';
+                inputHtml += '<img id = KnowledgeArea' + id + 'Name src="../img/delete-icon.png" class="remove-button" width="22" alt="Remove" border="0" style="margin-right: 2px;">';
+
+                inputHtml += '</div>';
+                $('#knowledgeAreasList').append(inputHtml);
+                event.preventDefault();
+            });
+
+            $("#knowledgeAreasList").delegate(".remove-button", "click", function(event) {
+                if (confirm('Are you sure you want to delete this knowledge area ' + event.target.id + ' ?')) {
+                    $('#div' + event.target.id).parent().remove();
+                }
+                event.preventDefault();
+            });
+        });
+
+
+    </script>
+
+    <?php echo $this->Form->create('BodyKnowledge'); ?>
+    <fieldset>
+        <legend><?php echo __('Create New Body of Knowledge'); ?></legend>
+        <?php
+        $dataPt = $this->Form->input('name', array('label' => 'Name:', 'div' => false, 'class' => 'pepe'));
+        echo $this->Html->tag('div', $dataPt, array('class' => 'longField required'));
+
+        $dataPt = $this->Form->input('description', array('label' => 'Description:', 'div' => false, 'class' => 'pepe muchText'));
+        echo $this->Html->tag('div', $dataPt, array('class' => 'longField required'));
+        ?>        
+
+        <div id="theKnowledgeAreas" class="generalContainer">
+
+            <?php echo $this->Html->tag('label', '<b>' . __('Knowledge Areas') . ':&nbsp;</b>', array('style' => 'clear:both;')); ?>
+
+
+
+
+            <?php
+            $linkText = __('Add Knowledge Area');
+            $image = 'add-icon.png';
+            $width = '24';
+            $border = '0';
+            echo $this->Html->link($linkText, '', array('class' => 'rightTitle', 'target' => '_blank', 'id' => 'add-knowledge-area', 'style' => 'float:right;'));
+            echo $this->Html->image($image, array('class' => 'rightIcon', 'width' => $width, 'alt' => $linkText, 'border' => $border));
+            ?>
+
+            <br />
+
+
+            <?php // echo $this->Html->link(__('Add Knowledge Area'), '', array('target' => '_blank', 'id' => 'add-knowledge-area', 'style' => 'float:right;'));  ?>
+
+            <?php
+            echo $this->Html->tag('br');
+            echo $this->Html->tag('br');
+            ?>
+
+            <ol id="knowledgeAreasList">
+
+            </ol>
+
+        </div>
+
+    </fieldset>
+    <?php echo $this->Form->end(__('Submit')); ?>
+</div>
+<div class="actions">
+    <h3><?php echo __('Actions'); ?></h3>
+    <ul>
+
+        <li><?php echo $this->Html->link(__('List Body of Knowledges'), array('action' => 'index')); ?></li>
+        <li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
+        <li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
+        <li><?php echo $this->Html->link(__('List Units'), array('controller' => 'units', 'action' => 'index')); ?> </li>
+        <li><?php echo $this->Html->link(__('New Unit'), array('controller' => 'units', 'action' => 'add')); ?> </li>
+    </ul>
+</div>

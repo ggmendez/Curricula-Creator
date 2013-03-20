@@ -1,3 +1,6 @@
+<?php echo $this->Html->addCrumb('My Courses', '/courses'); ?>
+<?php echo $this->Html->addCrumb ('Edit ' . $course['Course']['name']); ?>
+
 <?php echo $this->Html->script('jquery-1.9.1.min.js', false); ?>
 
 <?php $globalCounter = count($objectives); ?>
@@ -11,17 +14,17 @@
         $("#add-button").click(function(event) {
             var id = $initialId + 1;
             $initialId = $initialId + 1;
-            var inputHtml = '<div class="longField required" id="divObjective' + id + 'Description">';
+            var inputHtml = '<li><div class="longField required" id="divObjective' + id + 'Description">';
             inputHtml += '<input class="pepe objective" id="theObjective' + id + 'Description" type="text" required="required" name="data[Objective][' + id + '][description]" />';
             inputHtml += '<a id = Objective' + id + 'Description class="delete-button" >Delete</a>';
-            inputHtml += '</div>';
-            $('#courseObjectives').append(inputHtml);
+            inputHtml += '</div></li>';
+            $('#objectivesList').append(inputHtml);
             event.preventDefault();
         });
 
-        $("#courseObjectives").delegate(".delete-button", "click", function(event) {
-            if (confirm('Are you sure you want to delete objective ' + event.target.id + ' ?')) {
-                $('#div' + event.target.id).remove();
+        $("#objectivesList").delegate(".delete-button", "click", function(event) {
+            if (confirm('Are you sure you want to delete objective ' + '#li' + event.target.id + ' ?')) {
+                $('#div' + event.target.id).parent().remove();
             }
             event.preventDefault();
         });
@@ -69,13 +72,15 @@
 
         echo $this->Form->input('implementation_strategy_id', array('label' => 'Implementation Strategy:', 'class' => 'list'));
         ?>
-        
+
         <div class="generalContainer">
             <?php echo $this->Html->tag('label', '<b>Axes</b> (clic over <b>all</b> the options you want to select):'); ?>
             <br />
             <br />
             <div class="multipleOptionsPanel">
                 <?php echo $this->Form->input('Axis', array('class' => 'squaredTwo', 'div' => false, 'label' => false, 'type' => 'select', 'multiple' => 'checkbox', 'selected' => $selectedAxes)); ?>
+                
+                
             </div>
         </div>    
 
@@ -89,16 +94,37 @@
 
             <?php
             if (count($objectives) > 0) {
+
+
+
                 echo $this->Html->tag('br');
                 echo $this->Html->tag('br');
                 $i = 0;
-                foreach ($objectives as $objective) {
-                    $dataPt = $this->Form->input("Objective.$i.description", array('label' => false, 'div' => false, 'class' => 'pepe objective'));
-                    $dataPt .= $this->Form->hidden("Objective.$i.id", array( 'value' => $objective['Objective']['id'] ));
-                    $dataPt .= $this->Html->link('Delete', '', array('class' => 'delete-button', 'id' => 'Objective' . $i . 'Description'));
-                    echo $this->Html->tag('div', $dataPt, array('class' => 'longField required', 'id' => 'divObjective' . $i . 'Description'));
-                    $i++;
-                }
+                ?>
+
+                <ol id="objectivesList">
+
+                    <?php foreach ($objectives as $objective) { ?> 
+
+                        <li id="<?php echo 'liObjective' . $i . 'Description' ?>">
+
+                            <?php
+                            $dataPt = $this->Form->input("Objective.$i.description", array('label' => false, 'div' => false, 'class' => 'pepe objective'));
+                            $dataPt .= $this->Form->hidden("Objective.$i.id", array('value' => $objective['Objective']['id']));
+                            $dataPt .= $this->Html->link('Delete', '', array('class' => 'delete-button', 'id' => 'Objective' . $i . 'Description'));
+                            echo $this->Html->tag('div', $dataPt, array('class' => 'longField required', 'id' => 'divObjective' . $i . 'Description'));
+                            ?> 
+
+                        </li>
+
+                        <?php
+                        $i++;
+                    }
+                    ?>
+
+                </ol>
+
+                <?php
             }
             ?>
 
@@ -113,19 +139,19 @@
 
         <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Course.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Course.id'))); ?></li>
         <li><?php echo $this->Html->link(__('List Courses'), array('action' => 'index')); ?></li>
-        <li><?php // echo $this->Html->link(__('List Areas'), array('controller' => 'areas', 'action' => 'index')); ?> </li>
-        <li><?php // echo $this->Html->link(__('New Area'), array('controller' => 'areas', 'action' => 'add')); ?> </li>
-        <li><?php // echo $this->Html->link(__('List Levels'), array('controller' => 'levels', 'action' => 'index')); ?> </li>
-        <li><?php // echo $this->Html->link(__('New Level'), array('controller' => 'levels', 'action' => 'add')); ?> </li>
-        <li><?php // echo $this->Html->link(__('List Subjects'), array('controller' => 'subjects', 'action' => 'index')); ?> </li>
-        <li><?php // echo $this->Html->link(__('New Subcject'), array('controller' => 'subjects', 'action' => 'add')); ?> </li>
-        <li><?php // echo $this->Html->link(__('List Types'), array('controller' => 'types', 'action' => 'index')); ?> </li>
-        <li><?php // echo $this->Html->link(__('New Type'), array('controller' => 'types', 'action' => 'add')); ?> </li>
-        <li><?php // echo $this->Html->link(__('List Implementation Strategies'), array('controller' => 'implementation_strategies', 'action' => 'index')); ?> </li>
-        <li><?php // echo $this->Html->link(__('New Implementation Strategy'), array('controller' => 'implementation_strategies', 'action' => 'add')); ?> </li>
-        <li><?php // echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-        <li><?php // echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-        <li><?php // echo $this->Html->link(__('List Axes'), array('controller' => 'axes', 'action' => 'index')); ?> </li>
-        <li><?php // echo $this->Html->link(__('New Axis'), array('controller' => 'axes', 'action' => 'add')); ?> </li>
+        <li><?php // echo $this->Html->link(__('List Areas'), array('controller' => 'areas', 'action' => 'index'));      ?> </li>
+        <li><?php // echo $this->Html->link(__('New Area'), array('controller' => 'areas', 'action' => 'add'));      ?> </li>
+        <li><?php // echo $this->Html->link(__('List Levels'), array('controller' => 'levels', 'action' => 'index'));      ?> </li>
+        <li><?php // echo $this->Html->link(__('New Level'), array('controller' => 'levels', 'action' => 'add'));      ?> </li>
+        <li><?php // echo $this->Html->link(__('List Subjects'), array('controller' => 'subjects', 'action' => 'index'));      ?> </li>
+        <li><?php // echo $this->Html->link(__('New Subcject'), array('controller' => 'subjects', 'action' => 'add'));      ?> </li>
+        <li><?php // echo $this->Html->link(__('List Types'), array('controller' => 'types', 'action' => 'index'));      ?> </li>
+        <li><?php // echo $this->Html->link(__('New Type'), array('controller' => 'types', 'action' => 'add'));      ?> </li>
+        <li><?php // echo $this->Html->link(__('List Implementation Strategies'), array('controller' => 'implementation_strategies', 'action' => 'index'));      ?> </li>
+        <li><?php // echo $this->Html->link(__('New Implementation Strategy'), array('controller' => 'implementation_strategies', 'action' => 'add'));      ?> </li>
+        <li><?php // echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index'));      ?> </li>
+        <li><?php // echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add'));      ?> </li>
+        <li><?php // echo $this->Html->link(__('List Axes'), array('controller' => 'axes', 'action' => 'index'));      ?> </li>
+        <li><?php // echo $this->Html->link(__('New Axis'), array('controller' => 'axes', 'action' => 'add'));      ?> </li>
     </ul>
 </div>

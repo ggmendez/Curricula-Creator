@@ -66,7 +66,7 @@ class DATABASE_CONFIG {
 		'host' => 'localhost',
 		'login' => 'cakeuser',
 		'password' => 'cakepassword',
-		'database' => 'curricula',
+		'database' => 'devCurricula',
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);

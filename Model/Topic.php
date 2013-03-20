@@ -42,7 +42,14 @@ class Topic extends AppModel {
             'conditions' => '',
             'fields' => '',
             'order' => ''
-        )
+        ),
+        'TopicType' => array(
+            'className' => 'TopicType',
+            'foreignKey' => 'topic_type_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
     );
 
 }

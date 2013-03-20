@@ -46,7 +46,14 @@ class AppController extends Controller {
     public $components = array(
         'Session',
         'Auth' => array('authorize' => 'Controller'),
+        'RequestHandler',
     );
+
+    function beforeRender() {
+        if ($this->RequestHandler->isAjax() || $this->RequestHandler->isXml()) {
+            Configure::write('debug', 0);
+        }
+    }
 
     public function beforeFilter() {
         $this->Auth->deny('index', 'view', 'add', 'delete');

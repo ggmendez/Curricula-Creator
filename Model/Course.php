@@ -202,8 +202,6 @@ class Course extends AppModel {
     );
 
     //The Associations below have been created with all possible keys, those that are not needed can be removed
-    
-   
 
     /**
      * belongsTo associations
@@ -254,14 +252,14 @@ class Course extends AppModel {
             'order' => ''
         )
     );
-    
-     public $hasMany = array(
+    public $hasMany = array(
         'Objective' => array(
             'className' => 'Objective',
             'foreignKey' => 'course_id',
             'conditions' => '',
             'fields' => '',
-            'order' => ''
+            'order' => '',
+            'dependent' => true
         ),
     );
 
@@ -285,7 +283,22 @@ class Course extends AppModel {
             'finderQuery' => '',
             'deleteQuery' => '',
             'insertQuery' => ''
-        )
+        ),
+        'Program' => array(
+            'className' => 'Program',
+            'joinTable' => 'courses_programs',
+            'foreignKey' => 'course_id',
+            'associationForeignKey' => 'program_id',
+            'unique' => 'keepExisting',
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'finderQuery' => '',
+            'deleteQuery' => '',
+            'insertQuery' => ''
+        ),
     );
 
     public function isOwnedBy($course, $user) {

@@ -87,8 +87,6 @@ class CoursesController extends AppController {
             $requestData = $this->request->data;
             $code = $this->generateCourseCode($requestData);
             $this->request->data['Course']['code'] = $code;
-            
-            debug ($this->request->data);
 
             $this->Course->Objective->Course->saveAll($this->request->data);
 
@@ -128,8 +126,12 @@ class CoursesController extends AppController {
             $code = $this->generateCourseCode($requestData);
             $this->request->data['Course']['code'] = $code;
 
-            if ($this->Course->save($this->request->data)) {
-                $this->Course->Objective->Course->saveAll($this->request->data);
+            $options = array(
+                'Objective.course_id' => $this->request->data['Course']['id']
+            );
+            $this->Course->Objective->deleteAll($options, true);
+
+            if ($this->Course->saveAll($this->request->data)) {
                 $this->Session->setFlash(__('The course has been saved'));
                 $this->redirect(array('action' => 'view' . '/' . $this->request->data['Course']['id']));
             } else {
@@ -146,15 +148,23 @@ class CoursesController extends AppController {
         $implementationStrategies = $this->Course->ImplementationStrategy->find('list');
         $users = $this->Course->User->find('list');
         $axes = $this->Course->Axis->find('list');
-        $objectives = $this->Course->Objective->find('all', array(
-            'conditions' => array('Objective.course_id' => $this->request->data['Course']['id'])));
 
-        // TODO: luego debo hacer units
+        $options = array(
+            'conditions' => array('Objective.course_id' => $this->request->data['Course']['id'])
+        );
+        $objectives = $this->Course->Objective->find('all', $options);
+
+
+
+
 
         $selectedAxes = $this->getSelectedAxesPositions();
         $axesOfThisCourse = $this->getAxes();
 
         $this->set(compact('areas', 'levels', 'subjects', 'types', 'implementationStrategies', 'users', 'axes', 'selectedAxes', 'axesOfThisCourse', 'objectives'));
+
+        $options = array('conditions' => array('Course.' . $this->Course->primaryKey => $id));
+        $this->set('course', $this->Course->find('first', $options));
     }
 
     private function getAxes() {
