@@ -56,7 +56,21 @@ class AppController extends Controller {
     }
 
     public function beforeFilter() {
-        $this->Auth->deny('index', 'view', 'add', 'delete');
+        parent::beforeFilter();
+        $this->Auth->deny('index', 'view', 'add', 'delete', 'edit');
+    }
+
+    public function changeLanguage ($theUrl) {
+        
+        $language = substr($theUrl, 0, 3);
+        
+        $this->Session->write('Config.language', $language);
+
+//        $pos = strpos($theUrl, '/');
+//        
+//        $this->redirect(substr($theUrl, $pos, strlen($theUrl)));
+//        
+        $this->redirect($this->referer());
     }
 
     /* public function isAuthorized($user) {

@@ -1,4 +1,4 @@
-<div class="users form">
+<div class="users form" style="margin-left: 20%; width: 60%; margin-top: 50px;">
 <?php echo $this->Session->flash('auth'); ?>
 <?php echo $this->Form->create('User'); ?>
     <fieldset>

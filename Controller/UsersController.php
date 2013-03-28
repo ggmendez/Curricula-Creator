@@ -1,5 +1,7 @@
 <?php
+
 App::uses('AppController', 'Controller');
+
 /**
  * Users Controller
  *
@@ -9,37 +11,27 @@ App::uses('AppController', 'Controller');
 // app/Controller/UsersController.php
 class UsersController extends AppController {
 
-	public function beforeFilter() {
-		parent::beforeFilter();
-		$this->Auth->allow('add'); // Letting users register themselves
-	}
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->Auth->allow('add'); // Letting users register themselves
+    }
 
-	public function login() {
-		/*if ($this->request->is('post')) {
-			if ($this->Auth->login()) {
-				$this->redirect($this->Auth->redirect());
-			} else {
-				$this->Session->setFlash(__('Invalid username or password, try again'));
-			}
-		}
-		*/
-		
-		$this->set('title_for_layout', 'Login');
-		$this->layout = 'login';
-		
-		if ($this->request->is('post')) {
-			if ($this->Auth->login()) {
-				return $this->redirect($this->Auth->redirectUrl('courses'));
-				// Prior to 2.3 use `return $this->redirect($this->Auth->redirect());`
-			} else {
-				$this->Session->setFlash(__('Invalid username or password, try again'));
-			}
-		}
-	}
+    public function login() {
+        $this->set('title_for_layout', 'Login');
+        $this->layout = 'login';
 
-	public function logout() {
-		$this->redirect($this->Auth->logout());
-	}
+        if ($this->request->is('post')) {
+            if ($this->Auth->login()) {
+                return $this->redirect('/');
+            } else {
+                $this->Session->setFlash(__('Invalid username or password, try again'));
+            }
+        }
+    }
+
+    public function logout() {
+        $this->redirect($this->Auth->logout());
+    }
 
     public function index() {
         $this->User->recursive = 0;
@@ -61,7 +53,7 @@ class UsersController extends AppController {
                 $this->Session->setFlash(__('The user has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The user could not be saved. Please, see the messages below and try again.'));
             }
         }
     }
@@ -76,12 +68,13 @@ class UsersController extends AppController {
                 $this->Session->setFlash(__('The user has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The user could not be saved. Please, see the messages below and try again.'));
             }
         } else {
             $this->request->data = $this->User->read(null, $id);
             unset($this->request->data['User']['password']);
         }
+        $this->set('user', $this->User->read(null, $id));
     }
 
     public function delete($id = null) {
@@ -99,17 +92,18 @@ class UsersController extends AppController {
         $this->Session->setFlash(__('User was not deleted'));
         $this->redirect(array('action' => 'index'));
     }
-	
-	public function isAuthorized($user = null) {
 
-		// The owner of a user can edit and delete it
-		if (in_array($this->action, array('edit', 'delete'))) {
-			$userId = $this->request->params['pass'][0];
-			if ($this->User->isOwnedBy($userId, $user['id'])) {
-				return true;
-			}
-		}
+    public function isAuthorized($user = null) {
 
-		return parent::isAuthorized($user);
-	}
+        // The owner of a user can edit and delete it
+        if (in_array($this->action, array('edit', 'delete'))) {
+            $userId = $this->request->params['pass'][0];
+            if ($this->User->isOwnedBy($userId, $user['id'])) {
+                return true;
+            }
+        }
+
+        return parent::isAuthorized($user);
+    }
+
 }

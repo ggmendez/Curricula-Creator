@@ -3,13 +3,13 @@
 	<fieldset>
 		<legend><?php echo __('Add Topic'); ?></legend>
 	<?php
-		$dataPt = $this->Form->input('name', array('label' => 'Topic:', 'div' => false, 'class' => 'pepe'));
+		$dataPt = $this->Form->input('name', array('label' => __('Topic') . ':', 'div' => false, 'class' => 'pepe'));
                 echo $this->Html->tag('div', $dataPt, array('class' => 'longField required'));
                 
                 echo $this->Form->input('unit_id', array('class' => 'list'));
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Save')); ?>
+<?php echo $this->Form->end(); ?>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>

@@ -1,6 +1,6 @@
 <div class="units form">
     
-    <?php echo $this->Html->script('jquery-1.9.1.min.js', false); ?>
+    
 
     <script>
 
@@ -111,7 +111,7 @@
 
 
     </fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+<?php echo $this->Form->end(); ?>
 </div>
 <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>

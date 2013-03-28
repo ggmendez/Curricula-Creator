@@ -1,18 +1,31 @@
-<?php echo $this->Html->addCrumb('My Bodies of Knowledge', '/bodyKnowledges'); ?>
+<?php echo $this->Html->addCrumb(__('My Bodies of Knowledge'), '/bodyKnowledges'); ?>
 <?php echo $this->Html->addCrumb($knowledgeArea['BodyKnowledge']['name'], '/bodyKnowledges/view/' . $knowledgeArea['BodyKnowledge']['id']); ?>
 <?php echo $this->Html->addCrumb($knowledgeArea['KnowledgeArea']['name'], '/knowledgeAreas/view/' . $knowledgeArea['KnowledgeArea']['id']); ?>
 <?php echo $this->Html->addCrumb(__('Add Unit')); ?>
 
+<div class="smallMenu">    
+    <?php echo $this->Html->link($this->Html->image('cancel-icon.png', array('style' => 'margin-left: 15px; float: right;', 'width' => 30, 'alt' => __('Cancel'), 'border' => 0, 'rel' => 'tooltip', 'title' => __('Cancel'))), array('controller' => 'knowledge_areas', 'action' => 'view', $knowledgeArea['KnowledgeArea']['id']), array('escape' => false, 'id' => 'cancel-button')); ?>
+    <?php echo $this->Html->link($this->Html->image('save-icon.png', array('style' => 'margin-left: 15px; float: right;', 'width' => 30, 'alt' => __('Save'), 'border' => 0, 'rel' => 'tooltip', 'title' => __('Save'))), array('action' => 'edit', $knowledgeArea['KnowledgeArea']['id']), array('escape' => false)); ?>
+</div>
+
 <div class="units form">
 
-    <?php echo $this->Html->script('jquery-1.9.1.min.js', false); ?>
+    
+    
 
     <script>
 
         $(document).ready(function() {
 
+            $("#cancel-button").click(function(event) {
+                if (!confirm('<?php echo __('Are you sure you want to cancel this operation?'); ?>')) {
+                    event.preventDefault();
+                }
+            });
+
+
             $globalCounter = 0;
-<?php $globalCounter = 0; ?>
+            <?php $globalCounter = 0; ?>
 
 
             $("#add-topic").click(function(event) {
@@ -26,52 +39,21 @@
                 inputHtml += '<input type="text" id="theTopic' + id + 'Name" style="margin-top: 11px; width:60%;" class="inLineInput" name="data[Topic][' + id + '][name]">';
                 inputHtml += '<select id="topic_type_id' + id + '" style="margin-top: 11px; height: 32px; float:right; margin-right: 11px;" class="inLineList" name="data[Topic][' + id + '][topic_type_id]">';
 
-<?php foreach ($topicTypes as $topicType): ?>
+                <?php foreach ($topicTypes as $topicType): ?>
                     inputHtml += '<option value="<?php echo $topicType['TopicType']['id'] ?>"><?php echo $topicType['TopicType']['name'] ?></option>';
-<?php endforeach ?>
+                <?php endforeach ?>
 
                 inputHtml += '</select>';
                 inputHtml += '<label style="margin-top: 18px; height: 32px; float:right; margin-right: 0px;"><?php echo __('Type') ?>:</label>';
                 inputHtml += '</div></div>';
-
-//                inputHtml += '<a id = "Topic' + id + 'Name" class="delete-topic simpleLink" style="margin-right: -32px; margin-top: 1px;">Remove</a>';
-//                inputHtml += '<img id = "Topic' + id + 'Name" src="../../webroot/img/delete-icon.png" class="delete-topic" width="22" alt="Remove" border="0" style="margin-right: 2px;">';
-
-                inputHtml += '<img id = "Topic' + id + 'Name" src="../../webroot/img/delete-icon.png" class="delete-topic" width="22" alt="Remove" border="0" style="margin-right: 37px;">';
+                inputHtml += '<img id = "Topic' + id + 'Name" src="../../webroot/img/delete-icon.png" class="delete-topic" width="22" alt="<?php echo __('Remove'); ?>" border="0" style="margin-right: 37px;" rel="rightTooltip" title="<?php echo __('Remove'); ?>">';
 
                 inputHtml += '</li>';
 
                 $('#topicsList').append(inputHtml);
-                event.preventDefault();
-            });
-
-            $("#add-topic-button").click(function(event) {
-                var id = $globalCounter + 1;
-                $globalCounter = $globalCounter + 1;
-
-                var inputHtml = '<li style="margin-bottom: 50px;">';
-                inputHtml += '<div id="divTopic' + id + 'Name" class="inputsRow">';
-                inputHtml += '<div style="margin-bottom: -1em;" class="longField required">';
-                inputHtml += '<label style="margin-top: 18px; height: 32px; float:left; margin-right: 0px;"> <?php echo __('Name') ?>:</label>';
-                inputHtml += '<input type="text" id="theTopic' + id + 'Name" style="margin-top: 11px; width:60%;" class="inLineInput" name="data[Topic][' + id + '][name]">';
-                inputHtml += '<select id="topic_type_id' + id + '" style="margin-top: 11px; height: 32px; float:right; margin-right: 11px;" class="inLineList" name="data[Topic][' + id + '][topic_type_id]">';
-
-<?php foreach ($topicTypes as $topicType): ?>
-                    inputHtml += '<option value="<?php echo $topicType['TopicType']['id'] ?>"><?php echo $topicType['TopicType']['name'] ?></option>';
-<?php endforeach ?>
-
-                inputHtml += '</select>';
-                inputHtml += '<label style="margin-top: 18px; height: 32px; float:right; margin-right: 0px;"><?php echo __('Type') ?>:</label>';
-                inputHtml += '</div></div>';
-
-//                inputHtml += '<a id = "Topic' + id + 'Name" class="delete-topic simpleLink" style="margin-right: -32px; margin-top: 1px;">Remove</a>';
-//                inputHtml += '<img id = "Topic' + id + 'Name" src="../../webroot/img/delete-icon.png" class="delete-topic" width="22" alt="Remove" border="0" style="margin-right: 2px;">';
-
-                inputHtml += '<img id = "Topic' + id + 'Name" src="../../webroot/img/delete-icon.png" class="delete-topic" width="22" alt="Remove" border="0" style="margin-right: 37px;">';
-
-                inputHtml += '</li>';
-
-                $('#topicsList').append(inputHtml);
+                
+                bindTargetFunctions('"Topic' + id + 'Name"');
+                
                 event.preventDefault();
             });
 
@@ -99,72 +81,31 @@
                 inputHtml += '<div style="margin-bottom: -1em; margin-top: 42px; clear:both;" class="longField required">';
                 inputHtml += '<label style="margin-top: 18px; height: 32px; float:left; margin-right: 0px;"><?php echo __('Type') ?>:</label>';
                 inputHtml += '<select id="learning_objective_type_id' + id + '" style="margin-top: 11px; height: 32px; float:left; margin-right: 11px;" class="inLineList" name="data[LearningObjective][' + id + '][topic_type_id]">';
-<?php foreach ($topicTypes as $topicType): ?>
+                <?php foreach ($topicTypes as $topicType): ?>
                     inputHtml += '<option value="<?php echo $topicType['TopicType']['id'] ?>"><?php echo $topicType['TopicType']['name'] ?></option>';
-<?php endforeach ?>
+                <?php endforeach ?>
                 inputHtml += '</select>';
 
                 inputHtml += '<label style="margin-top: 18px; height: 32px; float:left; margin-right: 0px;"><?php echo __('Mastery Level') ?>:</label>';
                 inputHtml += '<select id="learning_objective_mastery_level_id' + id + '" style="margin-top: 11px; height: 32px; float:left; margin-right: 11px;" class="inLineList" name="data[LearningObjective][' + id + '][mastery_level_id]">';
-<?php foreach ($masteryLevels as $masteryLevel): ?>
+                <?php foreach ($masteryLevels as $masteryLevel): ?>
                     inputHtml += '<option value="<?php echo $masteryLevel['MasteryLevel']['id'] ?>"><?php echo $masteryLevel['MasteryLevel']['name'] ?></option>';
-<?php endforeach ?>
+                <?php endforeach ?>
                 inputHtml += '</select>';
 
                 inputHtml += '</div>';
                 inputHtml += '</div>';
-
-//                inputHtml += '<a id = "LearningObjective' + id + 'Name" class="delete-learning-objective simpleLink" style="margin-right: -32px; margin-top: 1px;">Remove</a>';
-//                inputHtml += '<img id = "LearningObjective' + id + 'Name" src="../../webroot/img/delete-icon.png" class="delete-learning-objective" width="22" alt="Remove" border="0" style="margin-right: 2px;">';
-
-                inputHtml += '<img id = "LearningObjective' + id + 'Name" src="../../webroot/img/delete-icon.png" class="delete-learning-objective" width="22" alt="Remove" border="0" style="margin-right: 37px;">';
+                
+                inputHtml += '<img id = "LearningObjective' + id + 'Name" src="../../webroot/img/delete-icon.png" class="delete-learning-objective" width="22" alt="<?php echo __('Remove'); ?>" border="0" style="margin-right: 37px;" rel="rightTooltip" title="<?php echo __('Remove'); ?>">';
 
                 inputHtml += '</li>';
 
                 $('#learningObjectivesList').append(inputHtml);
+                
+                bindTargetFunctions('"LearningObjective' + id + 'Name"');
+                
                 event.preventDefault();
-            });
 
-            $("#add-learning-objective-button").click(function(event) {
-                var id = $globalCounter + 1;
-                $globalCounter = $globalCounter + 1;
-
-                var inputHtml = '<li style="margin-bottom: 100px;">';
-
-                inputHtml += '<div id="divLearningObjective' + id + 'Name" class="inputsRow" style="height: 74px; clear:both;">';
-
-                inputHtml += '<div style="margin-bottom: -1em; margin-top: 1px;" class="longField required">';
-                inputHtml += '<label style="margin-top: 18px; height: 32px; float:left; margin-right: 0px;"> <?php echo __('Name') ?>:</label>';
-                inputHtml += '<input type="text" id="theLearningObjective' + id + 'Name" style="margin-top: 11px; margin-right: 11px; width:86%; float:right;" class="inLineInput" name="data[LearningObjective][' + id + '][description]">';
-                inputHtml += '</div>';
-
-                inputHtml += '<div style="margin-bottom: -1em; margin-top: 42px; clear:both;" class="longField required">';
-                inputHtml += '<label style="margin-top: 18px; height: 32px; float:left; margin-right: 0px;"><?php echo __('Type') ?>:</label>';
-                inputHtml += '<select id="learning_objective_type_id' + id + '" style="margin-top: 11px; height: 32px; float:left; margin-right: 11px;" class="inLineList" name="data[LearningObjective][' + id + '][topic_type_id]">';
-<?php foreach ($topicTypes as $topicType): ?>
-                    inputHtml += '<option value="<?php echo $topicType['TopicType']['id'] ?>"><?php echo $topicType['TopicType']['name'] ?></option>';
-<?php endforeach ?>
-                inputHtml += '</select>';
-
-                inputHtml += '<label style="margin-top: 18px; height: 32px; float:left; margin-right: 0px;"><?php echo __('Mastery Level') ?>:</label>';
-                inputHtml += '<select id="learning_objective_mastery_level_id' + id + '" style="margin-top: 11px; height: 32px; float:left; margin-right: 11px;" class="inLineList" name="data[LearningObjective][' + id + '][mastery_level_id]">';
-<?php foreach ($masteryLevels as $masteryLevel): ?>
-                    inputHtml += '<option value="<?php echo $masteryLevel['MasteryLevel']['id'] ?>"><?php echo $masteryLevel['MasteryLevel']['name'] ?></option>';
-<?php endforeach ?>
-                inputHtml += '</select>';
-
-                inputHtml += '</div>';
-                inputHtml += '</div>';
-
-//                inputHtml += '<a id = "LearningObjective' + id + 'Name" class="delete-learning-objective simpleLink" style="margin-right: -32px; margin-top: 1px;">Remove</a>';
-//                inputHtml += '<img id = "LearningObjective' + id + 'Name" src="../../webroot/img/delete-icon.png" class="delete-learning-objective" width="22" alt="Remove" border="0" style="margin-right: 2px;">';
-
-                inputHtml += '<img id = "LearningObjective' + id + 'Name" src="../../webroot/img/delete-icon.png" class="delete-learning-objective" width="22" alt="Remove" border="0" style="margin-right: 37px;">';
-
-                inputHtml += '</li>';
-
-                $('#learningObjectivesList').append(inputHtml);
-                event.preventDefault();
             });
 
             $("#learningObjectivesList").delegate(".delete-learning-objective", "click", function(event) {
@@ -173,8 +114,6 @@
                 }
                 event.preventDefault();
             });
-
-
 
         });
 
@@ -185,7 +124,7 @@
     <fieldset>
         <legend><?php echo __('Add Unit'); ?></legend>
         <?php
-        $dataPt = $this->Form->input('name', array('label' => __('Name') . ':', 'div' => false, 'class' => 'inLineInput'));              
+        $dataPt = $this->Form->input('name', array('label' => __('Name') . ':', 'div' => false, 'class' => 'inLineInput', 'style' => 'width: 38%;'));
         
         $dataPt .= $this->Form->input('knowledge_area_id', array('type' => 'text', 'value' => $knowledgeArea['KnowledgeArea']['name'] . ' (' . $knowledgeArea['KnowledgeArea']['abbreviation'] . ')', 'enable' => false, 'div' => false, 'label' => __('Knowledge Area') . ':', 'class' => 'inLineShortInput', 'disabled' => 'disabled'));
 
@@ -260,12 +199,12 @@
 
 
     </fieldset>
-    <?php echo $this->Form->end(__('Submit')); ?>
+    <?php echo $this->Form->end(); ?>
 </div>
-<div class="actions">
-    <h3><?php echo __('Actions'); ?></h3>
-    <ul>
-        <li><?php echo $this->Html->link(__('Add Topic'), '', array('target' => '_blank', 'id' => 'add-topic-button')); ?></li>
-        <li><?php echo $this->Html->link(__('Add Learning Objective'), '', array('target' => '_blank', 'id' => 'add-learning-objective-button')); ?></li>
-    </ul>
-</div>
+<!--<div class="actions">-->
+    <!--<h3><?php echo __('Actions'); ?></h3>-->
+    <!--<ul>-->
+        <!--<li><?php echo $this->Html->link(__('Add Topic'), '', array('target' => '_blank', 'id' => 'add-topic-button')); ?></li>-->
+        <!--<li><?php echo $this->Html->link(__('Add Learning Objective'), '', array('target' => '_blank', 'id' => 'add-learning-objective-button')); ?></li>-->
+    <!--</ul>-->
+<!--</div>-->

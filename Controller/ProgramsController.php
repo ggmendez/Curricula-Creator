@@ -50,7 +50,7 @@ class ProgramsController extends AppController {
                 $this->Session->setFlash(__('The program has been saved'));
                 $this->redirect(array('action' => 'view' . '/' . $this->request->data['Program']['id']));
             } else {
-                $this->Session->setFlash(__('The program could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The program could not be saved. Please, see the messages below and try again.'));
             }
         }
         $courses = $this->Program->Course->find('list', array(
@@ -74,7 +74,7 @@ class ProgramsController extends AppController {
                 $this->Session->setFlash(__('The program has been saved'));
                 $this->redirect(array('action' => 'view' . '/' . $this->request->data['Program']['id']));
             } else {
-                $this->Session->setFlash(__('The program could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The program could not be saved. Please, see the messages below and try again.'));
             }
         } else {
             $options = array('conditions' => array('Program.' . $this->Program->primaryKey => $id));
@@ -169,7 +169,7 @@ class ProgramsController extends AppController {
                 $this->Session->setFlash(__('The program has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The program could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The program could not be saved. Please, see the messages below and try again.'));
             }
         }
         $courses = $this->Program->Course->find('list');
@@ -192,7 +192,7 @@ class ProgramsController extends AppController {
                 $this->Session->setFlash(__('The program has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The program could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The program could not be saved. Please, see the messages below and try again.'));
             }
         } else {
             $options = array('conditions' => array('Program.' . $this->Program->primaryKey => $id));

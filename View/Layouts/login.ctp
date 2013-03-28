@@ -21,7 +21,7 @@
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo __('Curricula creator:'); ?>
+		<?php echo __('Curricula Creator' . ':'); ?>
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
@@ -38,7 +38,7 @@
 	<div id="container">
 		<div id="header">
 						
-		<?php echo $this->Html->image('PNG/Courses128.png'); ?> 
+		<?php // echo $this->Html->image('PNG/Courses128.png'); ?> 
 			
 			
 		</div>

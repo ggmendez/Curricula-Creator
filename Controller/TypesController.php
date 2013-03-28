@@ -44,7 +44,7 @@ class TypesController extends AppController {
 				$this->Session->setFlash(__('The type has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The type could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The type could not be saved. Please, see the messages below and try again.'));
 			}
 		}
 	}
@@ -65,7 +65,7 @@ class TypesController extends AppController {
 				$this->Session->setFlash(__('The type has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The type could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The type could not be saved. Please, see the messages below and try again.'));
 			}
 		} else {
 			$options = array('conditions' => array('Type.' . $this->Type->primaryKey => $id));
@@ -132,7 +132,7 @@ class TypesController extends AppController {
 				$this->Session->setFlash(__('The type has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The type could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The type could not be saved. Please, see the messages below and try again.'));
 			}
 		}
 	}
@@ -153,7 +153,7 @@ class TypesController extends AppController {
 				$this->Session->setFlash(__('The type has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The type could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The type could not be saved. Please, see the messages below and try again.'));
 			}
 		} else {
 			$options = array('conditions' => array('Type.' . $this->Type->primaryKey => $id));

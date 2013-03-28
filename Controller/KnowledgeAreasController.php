@@ -64,7 +64,7 @@ class KnowledgeAreasController extends AppController {
                 $this->Session->setFlash(__('The knowledge area has been saved'));
                 $this->redirect(array('action' => 'view/' . $this->KnowledgeArea->id));
             } else {
-                $this->Session->setFlash(__('The knowledge area could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The knowledge area could not be saved. Please, see the messages below and try again.'));
             }
         }
     }
@@ -122,17 +122,17 @@ class KnowledgeAreasController extends AppController {
             
             
             $removedUnitsIDs = $this->getRemovedUnitsIDs($id, $this->request->data);
-            $this->deleteUnits($removedUnitsIDs);
-            
             
             if ($this->KnowledgeArea->saveAll($this->request->data)) {
+                
+                $this->deleteUnits($removedUnitsIDs);
                 
                 $this->Session->write('key', $this->request->data);
                 
                 $this->Session->setFlash(__('The knowledge area has been saved'));
                 $this->redirect(array('action' => 'view/' . $this->KnowledgeArea->id));
             } else {
-                $this->Session->setFlash(__('The knowledge area could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The knowledge area could not be saved. Please, see the messages below and try again.'));
             }
         } else {
             $options = array('conditions' => array('KnowledgeArea.' . $this->KnowledgeArea->primaryKey => $id));
@@ -167,7 +167,7 @@ class KnowledgeAreasController extends AppController {
                 $this->Session->setFlash(__('The unit has been saved'));
                 $this->redirect(array('controller' => 'units', 'action' => 'view' . '/' . $this->KnowledgeArea->Unit->id));
             } else {
-                $this->Session->setFlash(__('The unit could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The unit could not be saved. Please, see the messages below and try again.'));
             }
         }
 
@@ -199,7 +199,7 @@ class KnowledgeAreasController extends AppController {
                 $this->Session->setFlash(__('The knowledge area description has been saved'));
                 $this->redirect(array('action' => 'view/' . $this->KnowledgeArea->id));
             } else {
-                $this->Session->setFlash(__('The knowledge area could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The knowledge area could not be saved. Please, see the messages below and try again.'));
             }
         }
     }
@@ -267,7 +267,7 @@ class KnowledgeAreasController extends AppController {
                 $this->Session->setFlash(__('The knowledge area has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The knowledge area could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The knowledge area could not be saved. Please, see the messages below and try again.'));
             }
         }
     }
@@ -288,7 +288,7 @@ class KnowledgeAreasController extends AppController {
                 $this->Session->setFlash(__('The knowledge area has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The knowledge area could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The knowledge area could not be saved. Please, see the messages below and try again.'));
             }
         } else {
             $options = array('conditions' => array('KnowledgeArea.' . $this->KnowledgeArea->primaryKey => $id));

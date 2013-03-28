@@ -1,7 +1,11 @@
-<?php echo $this->Html->addCrumb('My Study Programs'); ?>
+<?php echo $this->Html->addCrumb(__('My Study Programs')); ?>
+
+<div class="smallMenu">
+    <?php echo $this->Html->link($this->Html->image('add-icon.png', array('style' => 'float: right;', 'width' => 30, 'alt' => __('New'), 'border' => 0, 'rel' => 'tooltip', 'title' => __('New'))), array('controller' => 'programs', 'action' => 'add'), array('escape' => false)); ?>
+</div>
 
 <div class="programs index">
-	<h2><?php echo __('Programs'); ?></h2>
+	<h2><?php echo __('My Study Programs'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<!--<th><?php // echo $this->Paginator->sort('id'); ?></th>-->
@@ -35,12 +39,4 @@
 		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
 	?>
 	</div>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Program'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Courses'), array('controller' => 'courses', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Course'), array('controller' => 'courses', 'action' => 'add')); ?> </li>
-	</ul>
 </div>

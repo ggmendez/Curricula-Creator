@@ -1,24 +1,30 @@
-<?php // debug($knowledgeArea);                  ?>
+<?php // debug($knowledgeArea);                   ?>
 
-<?php echo $this->Html->addCrumb('My Bodies of Knowledge', '/bodyKnowledges'); ?>
+<?php echo $this->Html->addCrumb(__('My Bodies of Knowledge'), '/bodyKnowledges'); ?>
 <?php echo $this->Html->addCrumb($knowledgeArea['BodyKnowledge']['name'], '/bodyKnowledges/view/' . $knowledgeArea['BodyKnowledge']['id']); ?>
 <?php echo $this->Html->addCrumb($knowledgeArea['KnowledgeArea']['name']); ?>
+
+<div class="smallMenu">
+    <?php echo $this->Form->postLink($this->Html->image('delete-icon.png', array('style' => 'margin-left: 15px; float: right;', 'width' => 30, 'alt' => __('Delete'), 'border' => 0, 'rel' => 'tooltip', 'title' => __('Delete'))), array('action' => 'delete', $knowledgeArea['KnowledgeArea']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $knowledgeArea['KnowledgeArea']['id'])); ?>
+    <?php echo $this->Html->link($this->Html->image('edit-icon.png', array('style' => 'margin-left: 15px; float: right;', 'width' => 30, 'alt' => __('Edit'), 'border' => 0, 'rel' => 'tooltip', 'title' => __('Edit'))), array('action' => 'edit', $knowledgeArea['KnowledgeArea']['id']), array('escape' => false)); ?>
+    <?php echo $this->Html->link($this->Html->image('previous-icon.png', array('style' => 'margin-left: 15px; float: right;', 'width' => 30, 'alt' => __('Go back'), 'border' => 0, 'rel' => 'tooltip', 'title' => __('Go back'))), array('controller' => 'bodyKnowledges', 'action' => 'index'), array('escape' => false)); ?>
+</div>
 
 <div class="knowledgeAreas view">
 
     <?php // debug($requestData); ?>
     <?php // debug($knowledgeArea); ?>
-    
-    
+
+
     <?php // debug ($storedIDs); ?>
-    
+
     <?php // debug ($recievedIDs); ?>
 
     <?php // debug ($removedIDs); ?>
-    
+
     <?php // debug ($requestData); ?>
 
-    <?php echo $this->Html->script('jquery-1.9.1.min.js', false); ?>
+    
 
     <script>
 
@@ -64,8 +70,6 @@ $data = array(
     </script>
 
 
-    <h2><?php echo h($knowledgeArea['KnowledgeArea']['name']) . ' (' . h($knowledgeArea['KnowledgeArea']['abbreviation']) . ')'; ?></h2>
-
     <?php
     $totalCore1 = $core_tier_1_hours[0][0]['core_tier_1_hours'];
     $totalCore2 = $core_tier_2_hours[0][0]['core_tier_2_hours'];
@@ -79,27 +83,59 @@ $data = array(
     }
     ?>
 
-    <h4 style="text-align: center; color: #000"><?php echo '[<b>' . h($totalCore1) . '</b> Core-Tier-1 hours, <b>' . h($totalCore2) . '</b> Core-Tier-2 hours]'; ?></h4>
+    <h2><?php echo h($knowledgeArea['KnowledgeArea']['name']) . ' (' . h($knowledgeArea['KnowledgeArea']['abbreviation']) . ')'; ?></h2>
 
-<?php echo $this->Html->tag('br'); ?>
 
-    <?php echo $this->Html->tag('h3', __('Belongs to') . ':', array('style' => 'float:left;')); ?>
-    <div style="margin-left: 135px; vertical-align: middle; margin-top: 6px;">
-    <?php echo $this->Html->link($knowledgeArea['BodyKnowledge']['name'], array('controller' => 'body_knowledges', 'action' => 'view', $knowledgeArea['BodyKnowledge']['id'])); ?>
+
+
+
+    <?php echo $this->Html->tag('br'); ?>
+    <?php echo $this->Html->tag('h3', __('General Information') . ': '); ?>
+
+    <div style="padding-left: 20px;">
+
+        <?php echo $this->Html->tag('b', __('Body of Knowledge') . ': ') . $this->Html->link($knowledgeArea['BodyKnowledge']['name'], array('controller' => 'body_knowledges', 'action' => 'view', $knowledgeArea['BodyKnowledge']['id']), array('class' => 'simpleLink')); ?>
+        <?php echo $this->Html->tag('br'); ?>
+        <?php echo $this->Html->tag('br'); ?>
+        
+        <?php echo $this->Html->tag('b', __('Core-Tier-1') . ': ') . $totalCore1 . ' ' . __('hours'); ?>
+        <?php echo $this->Html->tag('br'); ?>
+        <?php echo $this->Html->tag('br'); ?>
+        <?php echo $this->Html->tag('b', __('Core-Tier-2') . ': ') . $totalCore2 . ' ' . __('hours'); ?>
+
     </div>
 
-<?php echo $this->Html->tag('br'); ?>
+
+
+
+
+
+
+
+
+
+
+    <!--<h4 style="text-align: center; color: #000"><?php echo '[<b>' . h($totalCore1) . '</b> Core-Tier-1 hours, <b>' . h($totalCore2) . '</b> Core-Tier-2 hours]'; ?></h4>-->
+
+    <?php // echo $this->Html->tag('br'); ?>
+
+    <?php // echo $this->Html->tag('h3', __('Belongs to') . ':', array('style' => 'float:left;')); ?>
+    <!--<div style="margin-left: 135px; vertical-align: middle; margin-top: 6px;">-->
+        <?php // echo $this->Html->link($knowledgeArea['BodyKnowledge']['name'], array('controller' => 'body_knowledges', 'action' => 'view', $knowledgeArea['BodyKnowledge']['id']), array('class' => 'simpleLink')); ?>
+    <!--</div>-->
+
+    <?php echo $this->Html->tag('br'); ?>
     <?php echo $this->Html->tag('br'); ?>
 
 
     <!--DESCRIPTION-->
 
 
-<?php
-if (empty($knowledgeArea['KnowledgeArea']['description'])) {
-    echo $this->Html->tag('h3', __('Description') . ' :');
-}
-?>
+    <?php
+    if (empty($knowledgeArea['KnowledgeArea']['description'])) {
+        echo $this->Html->tag('h3', __('Description') . ' :');
+    }
+    ?>
 
     <?php
     if (empty($knowledgeArea['KnowledgeArea']['description'])) {
@@ -118,53 +154,53 @@ if (empty($knowledgeArea['KnowledgeArea']['description'])) {
     ?>
 
 
-<?php
-if (empty($knowledgeArea['KnowledgeArea']['description'])) {
-    echo $this->Html->image($icon . '.png', array('class' => $theClass, 'alt' => $alt, 'border' => '0'));
-    ?> 
+    <?php
+    if (empty($knowledgeArea['KnowledgeArea']['description'])) {
+        echo $this->Html->image($icon . '.png', array('class' => $theClass, 'alt' => $alt, 'border' => '0'));
+        ?> 
         <a target="_blank"> 
-        <?php echo $this->Html->tag($tag, '<b>' . $text . '</b>', array('id' => 'editKnowledgeAreaDescription', 'style' => 'cursor: pointer;')); ?>
+            <?php echo $this->Html->tag($tag, '<b>' . $text . '</b>', array('id' => 'editKnowledgeAreaDescription', 'style' => 'cursor: pointer;')); ?>
         </a> 
-        <?php } else { ?> 
-        <a target="_blank">
-        <?php echo $this->Html->image($icon . '.png', array('id' => 'editKnowledgeAreaDescription', 'class' => $theClass, 'alt' => $alt, 'border' => '0', 'style' => 'cursor: pointer;', 'after' => 'Edit')); ?>
+    <?php } else { ?> 
+        <!--<a target="_blank">-->
+            <?php // echo $this->Html->image($icon . '.png', array('id' => 'editKnowledgeAreaDescription', 'class' => $theClass, 'alt' => $alt, 'border' => '0', 'style' => 'cursor: pointer;', 'after' => 'Edit')); ?>
         </a> 
-            <?php
-            echo $this->Html->tag($tag, $text);
-        }
-        ?>
+        <?php
+        echo $this->Html->tag($tag, $text);
+    }
+    ?>
 
     <div id="theDescription" style="clear:both;"> 
-<?php
-if (!empty($knowledgeArea['KnowledgeArea']['description'])) {
-    echo $this->Html->tag('div', nl2br(h($knowledgeArea['KnowledgeArea']['description'])), array('id' => 'theDescription', 'style' => 'padding-left: 20px; text-align: justify;'));
-}
-?>
+        <?php
+        if (!empty($knowledgeArea['KnowledgeArea']['description'])) {
+            echo $this->Html->tag('div', nl2br(h($knowledgeArea['KnowledgeArea']['description'])), array('id' => 'theDescription', 'style' => 'padding-left: 20px; text-align: justify;'));
+        }
+        ?>
     </div>
 
-<?php echo $this->Html->tag('br'); ?>
+    <?php echo $this->Html->tag('br'); ?>
     <?php echo $this->Html->tag('br'); ?>
 
 
 
     <!--UNITS-->
 
-<?php
-echo $this->Html->tag('h3', __('Units') . ':', array('style' => 'float:left;'));
+    <?php
+    echo $this->Html->tag('h3', __('Units') . ':', array('style' => 'float:left;'));
 
-$linkText = __('Add Unit');
-$image = 'add-icon.png';
-$controller = 'knowledgeAreas';
-$action = 'add_unit/' . $knowledgeArea['KnowledgeArea']['id'];
-$width = '24';
-$border = '0';
+    $linkText = __('Add Unit');
+    $image = 'add-icon.png';
+    $controller = 'knowledgeAreas';
+    $action = 'add_unit/' . $knowledgeArea['KnowledgeArea']['id'];
+    $width = '24';
+    $border = '0';
 
-echo $this->Html->link($linkText, array('controller' => $controller, 'action' => $action), array('class' => 'rightTitle'));
-echo $this->Html->link($this->Html->image($image, array('class' => 'rightIcon', 'width' => $width, 'alt' => $linkText, 'border' => $border)), array('controller' => $controller, 'action' => $action), array('escape' => false));
+    echo $this->Html->link($linkText, array('controller' => $controller, 'action' => $action), array('class' => 'rightTitle'));
+    echo $this->Html->link($this->Html->image($image, array('class' => 'rightIcon', 'width' => $width, 'alt' => $linkText, 'border' => $border)), array('controller' => $controller, 'action' => $action), array('escape' => false));
 
-$units = $knowledgeArea['Unit'];
-if (empty($units)) {
-    ?> <div class="noElements"> <?php echo __('This Knowledge Area has no Units yet.'); ?> </div> <?php
+    $units = $knowledgeArea['Unit'];
+    if (empty($units)) {
+        ?> <div class="noElements"> <?php echo __('This Knowledge Area has no Units yet.'); ?> </div> <?php
     } else {
 
 
@@ -178,19 +214,19 @@ if (empty($units)) {
                 <th style="width: 110px;"><?php echo __('Core-Tier2 hours'); ?></th>
                 <th style="width: 110px;"><?php echo __('Includes Electives'); ?></th>
             </tr>
-    <?php foreach ($units as $unit): ?>
+            <?php foreach ($units as $unit): ?>
 
                 <tr>                
                     <td style="text-align: left; padding-left: 10px;"><?php echo '<b>' . $cont++ . '.</b> ' . $this->Html->link($knowledgeArea['KnowledgeArea']['abbreviation'] . '/' . $unit['name'], array('controller' => 'units', 'action' => 'view', $unit['id']), array('class' => 'simpleLink')); ?>&nbsp;</td>
                     <td><?php echo h($unit['core_tier_1_hours']); ?>&nbsp;</td>
                     <td><?php echo h($unit['core_tier_2_hours']); ?>&nbsp;</td>
-                    <td><?php echo h($unit['includes_electives']); ?>&nbsp;</td>
+                    <td><?php echo h(__($unit['includes_electives'])); ?>&nbsp;</td>
                 </tr>
 
-    <?php endforeach; ?>
+            <?php endforeach; ?>
         </table>
 
-<?php } ?> 
+    <?php } ?> 
 
 
 
@@ -199,13 +235,13 @@ if (empty($units)) {
 
 
 
-<div class="actions">
-    <h3><?php echo __('Actions'); ?></h3>
-    <ul>
-        <li><?php echo $this->Html->link(__('Edit Knowledge Area'), array('action' => 'edit', $knowledgeArea['KnowledgeArea']['id'])); ?> </li>
-        <li><?php echo $this->Html->link(__('Add Unit'), array('action' => 'add_unit', $knowledgeArea['KnowledgeArea']['id'])); ?> </li>
-        <li><?php echo $this->Form->postLink(__('Delete Knowledge Area'), array('action' => 'delete', $knowledgeArea['KnowledgeArea']['id']), null, __('Are you sure you want to delete # %s?', $knowledgeArea['KnowledgeArea']['id'])); ?> </li>
-        <!--<li><?php // echo $this->Html->link(__('List Knowledge Areas'), array('action' => 'index')); ?> </li>-->
-        <!--<li><?php // echo $this->Html->link(__('New Knowledge Area'), array('action' => 'add')); ?> </li>-->
-    </ul>
-</div>
+<!--<div class="actions">-->
+    <!--<h3><?php // echo __('Actions'); ?></h3>-->
+<!--<ul>-->
+    <!--<li><?php // echo $this->Html->link(__('Edit Knowledge Area'), array('action' => 'edit', $knowledgeArea['KnowledgeArea']['id'])); ?> </li>-->
+    <!--<li><?php // echo $this->Html->link(__('Add Unit'), array('action' => 'add_unit', $knowledgeArea['KnowledgeArea']['id'])); ?> </li>-->
+    <!--<li><?php // echo $this->Form->postLink(__('Delete Knowledge Area'), array('action' => 'delete', $knowledgeArea['KnowledgeArea']['id']), null, __('Are you sure you want to delete # %s?', $knowledgeArea['KnowledgeArea']['id'])); ?> </li>-->
+    <!--<li><?php // echo $this->Html->link(__('List Knowledge Areas'), array('action' => 'index'));  ?> </li>-->
+    <!--<li><?php // echo $this->Html->link(__('New Knowledge Area'), array('action' => 'add'));  ?> </li>-->
+<!--</ul>-->
+<!--</div>-->

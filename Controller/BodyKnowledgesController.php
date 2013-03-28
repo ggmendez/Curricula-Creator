@@ -58,7 +58,7 @@ class BodyKnowledgesController extends AppController {
                 $this->Session->setFlash(__('The Body of Knowledge has been saved'));
                 $this->redirect(array('action' => 'view/' . $this->BodyKnowledge->id));
             } else {
-                $this->Session->setFlash(__('The Body of Knowledge could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The Body of Knowledge could not be saved. Please, see the messages below and try again.'));
             }
         }
     }
@@ -110,16 +110,17 @@ class BodyKnowledgesController extends AppController {
             $this->request->data['BodyKnowledge']['user_id'] = $this->Auth->user('id');
 
             $removedKAIDs = $this->getRemovedKAids($id, $this->request->data);
-            $this->deleteKnowledgeAreas($removedKAIDs);
 
             if ($this->BodyKnowledge->saveAll($this->request->data)) {
+                
+                $this->deleteKnowledgeAreas($removedKAIDs);
 
                 $this->Session->write('key', $this->request->data);
 
                 $this->Session->setFlash(__('The Body of Knowledge has been saved'));
                 $this->redirect(array('action' => 'view/' . $this->BodyKnowledge->id));
             } else {
-                $this->Session->setFlash(__('The Body of Knowledge could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The Body of Knowledge could not be saved. Please, see the messages below and try again.'));
             }
         } else {
             $options = array('conditions' => array('BodyKnowledge.' . $this->BodyKnowledge->primaryKey => $id));
@@ -145,7 +146,7 @@ class BodyKnowledgesController extends AppController {
                 $this->Session->setFlash(__('The Knowledge Area ' . $this->BodyKnowledge->KnowledgeArea->name . ' has been added to the Body of Knowledge.'));
                 $this->redirect(array('controller' => 'knowledgeAreas', 'action' => 'view/' . $this->BodyKnowledge->KnowledgeArea->id));
             } else {
-                $this->Session->setFlash(__('The knowledge area could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The knowledge area could not be saved. Please, see the messages below and try again.'));
             }
         }
 
@@ -212,7 +213,7 @@ class BodyKnowledgesController extends AppController {
                 $this->Session->setFlash(__('The Body of Knowledge has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The Body of Knowledge could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The Body of Knowledge could not be saved. Please, see the messages below and try again.'));
             }
         }
         $users = $this->BodyKnowledge->User->find('list');
@@ -235,7 +236,7 @@ class BodyKnowledgesController extends AppController {
                 $this->Session->setFlash(__('The Body of Knowledge has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The Body of Knowledge could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The Body of Knowledge could not be saved. Please, see the messages below and try again.'));
             }
         } else {
             $options = array('conditions' => array('BodyKnowledge.' . $this->BodyKnowledge->primaryKey => $id));

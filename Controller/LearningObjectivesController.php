@@ -53,7 +53,7 @@ class LearningObjectivesController extends AppController {
                 $this->Session->setFlash(__('The learning objective has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The learning objective could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The learning objective could not be saved. Please, see the messages below and try again.'));
             }
         }
         $units = $this->LearningObjective->Unit->find('list');
@@ -76,7 +76,7 @@ class LearningObjectivesController extends AppController {
                 $this->Session->setFlash(__('The learning objective has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The learning objective could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The learning objective could not be saved. Please, see the messages below and try again.'));
             }
         } else {
             $options = array('conditions' => array('LearningObjective.' . $this->LearningObjective->primaryKey => $id));
@@ -145,7 +145,7 @@ class LearningObjectivesController extends AppController {
                 $this->Session->setFlash(__('The learning objective has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The learning objective could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The learning objective could not be saved. Please, see the messages below and try again.'));
             }
         }
         $units = $this->LearningObjective->Unit->find('list');
@@ -168,7 +168,7 @@ class LearningObjectivesController extends AppController {
                 $this->Session->setFlash(__('The learning objective has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The learning objective could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The learning objective could not be saved. Please, see the messages below and try again.'));
             }
         } else {
             $options = array('conditions' => array('LearningObjective.' . $this->LearningObjective->primaryKey => $id));

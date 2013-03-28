@@ -5,27 +5,27 @@
         <?php
         echo $this->Form->input('id');
 
-        $dataPt = $this->Form->input('name', array('label' => 'Program Name:', 'div' => false, 'class' => 'pepe'));
+        $dataPt = $this->Form->input('name', array('label' => __('Name') . ':', 'div' => false, 'class' => 'pepe'));
         echo $this->Html->tag('div', $dataPt, array('class' => 'longField required'));
 
-        $dataPt = $this->Form->input('description', array('label' => 'Description:', 'div' => false, 'class' => 'pepe muchText'));
+        $dataPt = $this->Form->input('description', array('label' => __('Description') . ':', 'div' => false, 'class' => 'pepe muchText'));
         echo $this->Html->tag('div', $dataPt, array('class' => 'longField required'));
         
         ?>
 
         <div class="generalContainer">
-            <?php echo $this->Html->tag('label', 'Courses:', array('class' => 'required')); ?>
+            <?php echo $this->Html->tag('label', __('Courses') . ':', array('class' => 'required')); ?>
             <br />
             <br />
             <div class="multipleOptionsPanel">
-                <?php echo $this->Form->input('Course', array('class' => 'squaredTwo', 'div' => false, 'label' => false, 'type' => 'select', 'multiple' => 'checkbox', 'selected' => $selectedCourses)); ?>
+                <?php echo $this->Form->input(__('Course'), array('class' => 'squaredTwo', 'div' => false, 'label' => false, 'type' => 'select', 'multiple' => 'checkbox', 'selected' => $selectedCourses)); ?>
             </div>
         </div>
         
         
         
     </fieldset>
-    <?php echo $this->Form->end(__('Submit')); ?>
+    <?php echo $this->Form->end(); ?>
 </div>
 <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>

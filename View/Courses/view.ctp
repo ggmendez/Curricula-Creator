@@ -1,5 +1,12 @@
-<?php echo $this->Html->addCrumb('My Courses', '/courses'); ?>
+<?php echo $this->Html->addCrumb(__('My Courses'), '/courses'); ?>
 <?php echo $this->Html->addCrumb ($course['Course']['name']); ?>
+
+<div class="smallMenu">
+    <?php echo $this->Form->postLink($this->Html->image('delete-icon.png', array('style' => 'margin-left: 15px; float: right;', 'width' => 30, 'alt' => __('Delete'), 'border' => 0, 'rel' => 'tooltip', 'title' => __('Delete'))), array('action' => 'delete', $course['Course']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $course['Course']['id'])); ?>
+    <?php echo $this->Html->link($this->Html->image('syllabus-icon.png', array('style' => 'margin-left: 15px; float: right;', 'width' => 30, 'alt' => __('Save'), 'border' => 0, 'rel' => 'tooltip', 'title' => __('Define Syllabus'))), '', array('escape' => false, 'id' => 'save-button')); ?>
+    <?php echo $this->Html->link($this->Html->image('edit-icon.png', array('style' => 'margin-left: 15px; float: right;', 'width' => 30, 'alt' => __('Edit'), 'border' => 0, 'rel' => 'tooltip', 'title' => __('Edit'))), array('action' => 'edit', $course['Course']['id']), array('escape' => false)); ?>
+    <?php echo $this->Html->link($this->Html->image('previous-icon.png', array('style' => 'margin-left: 15px; float: right;', 'width' => 30, 'alt' => __('Go back'), 'border' => 0, 'rel' => 'tooltip', 'title' => __('Go back'))), array('controller' => 'courses', 'action' => 'index'), array('escape' => false)); ?>
+</div>
 
 <div class="courses view">
 
@@ -11,39 +18,39 @@
     <h2><?php echo h($course['Course']['code'] . ' - ' . $course['Course']['name'] . ' (' . $course['Type']['name'] . ')'); ?></h2>
 
     <?php echo $this->Html->tag('br'); ?>
-    <?php echo $this->Html->tag('h3', 'General Information:'); ?>
+    <?php echo $this->Html->tag('h3', __('General Information') . ': '); ?>
 
     <div style="padding-left: 20px;">
 
-        <?php echo $this->Html->tag('b', 'Credits: ') . $course['Course']['credits']; ?>
+        <?php echo $this->Html->tag('b', __('Credits') . ': ') . $course['Course']['credits']; ?>
         &nbsp;
-        <?php echo $this->Html->tag('b', 'Semester: ') . $course['Course']['semester']; ?>
+        <?php echo $this->Html->tag('b', __('Semester') . ': ') . $course['Course']['semester']; ?>
         &nbsp;
-        <?php echo $this->Html->tag('b', 'Level: ') . $course['Level']['name']; ?>
+        <?php echo $this->Html->tag('b', __('Level') . ': ') . $course['Level']['name']; ?>
 
         <?php echo $this->Html->tag('br'); ?>
         <?php echo $this->Html->tag('br'); ?>
 
-        <?php echo $this->Html->tag('b', 'Area: ') . $course['Area']['name']; ?>
+        <?php echo $this->Html->tag('b', __('Area') . ': ') . $course['Area']['name']; ?>
         &nbsp;
-        <?php echo $this->Html->tag('b', 'Subject: ') . $course['Subject']['name']; ?>    
+        <?php echo $this->Html->tag('b', __('Subject') . ': ') . $course['Subject']['name']; ?>    
 
         <?php echo $this->Html->tag('br'); ?>
         <?php echo $this->Html->tag('br'); ?>
 
 
-        <?php echo $this->Html->tag('b', 'Time distribution: &nbsp; Theory: ') . $course['Course']['theory_hours'] . ' hours'; ?>
+        <?php echo $this->Html->tag('b', __('Time distribution') . ': &nbsp; ' . __('Theory') . ': ') . $course['Course']['theory_hours'] . ' ' . __('hours'); ?>
         &nbsp;
-        <?php echo $this->Html->tag('b', 'Practice: ') . $course['Course']['practice_hours'] . ' hours'; ?>
+        <?php echo $this->Html->tag('b', __('Practice') . ': ') . $course['Course']['practice_hours'] . ' ' . __('hours'); ?>
         &nbsp;    
-        <?php echo $this->Html->tag('b', 'Lab: ') . $course['Course']['lab_hours'] . ' hours'; ?>
+        <?php echo $this->Html->tag('b', __('Lab') . ': ') . $course['Course']['lab_hours'] . ' ' . __('hours'); ?>
         &nbsp;
 
         <?php echo $this->Html->tag('br'); ?>
         <?php echo $this->Html->tag('br'); ?>
 
 
-        <?php echo $this->Html->tag('b', 'Implementation Strategy: ') . $course['ImplementationStrategy']['name']; ?>
+        <?php echo $this->Html->tag('b', __('Implementation Strategy') . ': ') . $course['ImplementationStrategy']['name']; ?>
 
         <?php echo $this->Html->tag('br'); ?>
         <?php echo $this->Html->tag('br'); ?>
@@ -60,7 +67,7 @@
         $axesString = substr($axesString, 0, -3);
         
         ?>
-        <?php echo $this->Html->tag('b', 'Axes: ') . ' ' . $axesString; ?>
+        <?php echo $this->Html->tag('b', __('Axes') . ': ') . ' ' . $axesString; ?>
 
 
 
@@ -69,7 +76,7 @@
     <?php echo $this->Html->tag('br'); ?>
     <?php echo $this->Html->tag('br'); ?>
 
-    <?php echo $this->Html->tag('h3', 'Justification:'); ?>
+    <?php echo $this->Html->tag('h3', __('Justification') . ':'); ?>
     <?php echo $this->Html->tag('div', $course['Course']['justification'], array('style' => 'padding-left: 20px; text-align: justify;')); ?>
 
     <?php
@@ -80,7 +87,7 @@
         <?php echo $this->Html->tag('br'); ?>
         <?php echo $this->Html->tag('br'); ?>
 
-        <?php echo $this->Html->tag('h3', 'General Objectives:'); ?>
+        <?php echo $this->Html->tag('h3', __('General Objectives') . ':'); ?>
 
         <ol>
             <?php
@@ -164,29 +171,29 @@
         <!--<dd><?php // echo $this->Html->link($course['User']['username'], array('controller' => 'users', 'action' => 'view', $course['User']['id']));               ?>&nbsp;</dd>-->
     </dl>
 </div>
-<div class="actions">
-    <h3><?php echo __('Actions'); ?></h3>
-    <ul>
-        <li><?php echo $this->Html->link(__('Edit Course'), array('action' => 'edit', $course['Course']['id'])); ?> </li>
-        <li><?php echo $this->Form->postLink(__('Delete Course'), array('action' => 'delete', $course['Course']['id']), null, __('Are you sure you want to delete # %s?', $course['Course']['id'])); ?> </li>
-        <li><?php echo $this->Html->link(__('List Courses'), array('action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('New Course'), array('action' => 'add')); ?> </li>
-        <li><?php // echo $this->Html->link(__('List Areas'), array('controller' => 'areas', 'action' => 'index')); ?> </li>
-        <li><?php // echo $this->Html->link(__('New Area'), array('controller' => 'areas', 'action' => 'add')); ?> </li>
-        <li><?php // echo $this->Html->link(__('List Levels'), array('controller' => 'levels', 'action' => 'index')); ?> </li>
-        <li><?php // echo $this->Html->link(__('New Level'), array('controller' => 'levels', 'action' => 'add')); ?> </li>
-        <li><?php // echo $this->Html->link(__('List Subjects'), array('controller' => 'subjects', 'action' => 'index')); ?> </li>
-        <li><?php // echo $this->Html->link(__('New Subject'), array('controller' => 'subjects', 'action' => 'add')); ?> </li>
-        <li><?php // echo $this->Html->link(__('List Types'), array('controller' => 'types', 'action' => 'index')); ?> </li>
-        <li><?php // echo $this->Html->link(__('New Type'), array('controller' => 'types', 'action' => 'add')); ?> </li>
-        <li><?php // echo $this->Html->link(__('List Implementation Strategies'), array('controller' => 'implementation_strategies', 'action' => 'index')); ?> </li>
-        <li><?php // echo $this->Html->link(__('New Implementation Strategy'), array('controller' => 'implementation_strategies', 'action' => 'add')); ?> </li>
-        <li><?php // echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-        <li><?php // echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-        <li><?php // echo $this->Html->link(__('List Axes'), array('controller' => 'axes', 'action' => 'index')); ?> </li>
-        <li><?php // echo $this->Html->link(__('New Axis'), array('controller' => 'axes', 'action' => 'add')); ?> </li>
-    </ul>
-</div>
+<!--<div class="actions">-->
+    <!--<h3><?php echo __('Actions'); ?></h3>-->
+    <!--<ul>-->
+        <!--<li><?php echo $this->Html->link(__('Edit Course'), array('action' => 'edit', $course['Course']['id'])); ?> </li>-->
+        <!--<li><?php echo $this->Form->postLink(__('Delete Course'), array('action' => 'delete', $course['Course']['id']), null, __('Are you sure you want to delete # %s?', $course['Course']['id'])); ?> </li>-->
+        <!--<li><?php echo $this->Html->link(__('List Courses'), array('action' => 'index')); ?> </li>-->
+        <!--<li><?php echo $this->Html->link(__('New Course'), array('action' => 'add')); ?> </li>-->
+        <!--<li><?php // echo $this->Html->link(__('List Areas'), array('controller' => 'areas', 'action' => 'index')); ?> </li>-->
+        <!--<li><?php // echo $this->Html->link(__('New Area'), array('controller' => 'areas', 'action' => 'add')); ?> </li>-->
+        <!--<li><?php // echo $this->Html->link(__('List Levels'), array('controller' => 'levels', 'action' => 'index')); ?> </li>-->
+        <!--<li><?php // echo $this->Html->link(__('New Level'), array('controller' => 'levels', 'action' => 'add')); ?> </li>-->
+        <!--<li><?php // echo $this->Html->link(__('List Subjects'), array('controller' => 'subjects', 'action' => 'index')); ?> </li>-->
+        <!--<li><?php // echo $this->Html->link(__('New Subject'), array('controller' => 'subjects', 'action' => 'add')); ?> </li>-->
+        <!--<li><?php // echo $this->Html->link(__('List Types'), array('controller' => 'types', 'action' => 'index')); ?> </li>-->
+        <!--<li><?php // echo $this->Html->link(__('New Type'), array('controller' => 'types', 'action' => 'add')); ?> </li>-->
+        <!--<li><?php // echo $this->Html->link(__('List Implementation Strategies'), array('controller' => 'implementation_strategies', 'action' => 'index')); ?> </li>-->
+        <!--<li><?php // echo $this->Html->link(__('New Implementation Strategy'), array('controller' => 'implementation_strategies', 'action' => 'add')); ?> </li>-->
+        <!--<li><?php // echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>-->
+        <!--<li><?php // echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>-->
+        <!--<li><?php // echo $this->Html->link(__('List Axes'), array('controller' => 'axes', 'action' => 'index')); ?> </li>-->
+        <!--<li><?php // echo $this->Html->link(__('New Axis'), array('controller' => 'axes', 'action' => 'add')); ?> </li>-->
+    <!--</ul>-->
+<!--</div>-->
 <!--<div class="related">
     <h3><?php echo __('Related Axes'); ?></h3>
     <?php if (!empty($course['Axis'])): ?>
@@ -217,7 +224,7 @@
 
     <div class="actions">
         <ul>
-            <li><?php echo $this->Html->link(__('New Axis'), array('controller' => 'axes', 'action' => 'add')); ?> </li>
+            <li><?php // echo $this->Html->link(__('New Axis'), array('controller' => 'axes', 'action' => 'add')); ?> </li>
         </ul>
     </div>
 </div>-->

@@ -3,6 +3,11 @@
 <?php echo $this->Html->addCrumb($unit['KnowledgeArea']['name'], '/knowledge_areas/view/' . $unit['KnowledgeArea']['id']); ?>
 <?php echo $this->Html->addCrumb('Edit ' . $unit['Unit']['name']); ?>
 
+<div class="smallMenu">    
+    <?php echo $this->Html->link($this->Html->image('cancel-icon.png', array('style' => 'margin-left: 15px; float: right;', 'width' => 30, 'alt' => __('Cancel'), 'border' => 0, 'rel' => 'tooltip', 'title' => __('Cancel'))), array('controller' => 'units', 'action' => 'view', $unit['Unit']['id']), array('escape' => false, 'id' => 'cancel-button')); ?>
+    <?php echo $this->Html->link($this->Html->image('save-icon.png', array('style' => 'margin-left: 15px; float: right;', 'width' => 30, 'alt' => __('Save'), 'border' => 0, 'rel' => 'tooltip', 'title' => __('Save'))), array('action' => 'edit', $unit['Unit']['id']), array('escape' => false, 'id' => 'save-button')); ?>
+</div>
+
 <?php
 $topics = $unit['Topic'];
 $topicsCounter = count($topics);
@@ -13,12 +18,24 @@ $learningObjectivesCounter = count($learningObjectives);
 
 <div class="units form">
 
-    <?php echo $this->Html->script('jquery-1.9.1.min.js', false); ?>
+    
 
     <script>
 
         $(document).ready(function() {
 
+            $("#save-button").click(function(event) {
+                $('#UnitEditForm').submit();
+                event.preventDefault();
+            });
+
+            $("#cancel-button").click(function(event) {
+                if (!confirm('Are you sure you want to cancel the edition of this Unit?')) {
+                    event.preventDefault();
+                }
+            });
+        
+        
             $totalTopics = <?php echo $topicsCounter; ?>;
             $totalLearningObjectives = <?php echo $topicsCounter; ?>;
             
@@ -43,7 +60,7 @@ $learningObjectivesCounter = count($learningObjectives);
                 inputHtml += '</select>';
                 inputHtml += '<label style="margin-top: 18px; height: 32px; float:right; margin-right: 0px;"><?php echo __('Type') ?>:</label>';
                 inputHtml += '</div></div>';
-                inputHtml += '<img id = "Topic' + id + 'Name" src="../../webroot/img/delete-icon.png" class="delete-topic" width="22" alt="Remove" border="0" style="margin-right: 37px;">';
+                inputHtml += '<img id = "Topic' + id + 'Name" src="../../webroot/img/delete-icon.png" class="delete-topic" width="22" alt="<?php echo __('Remove') ?>" border="0" style="margin-right: 37px;">';
 
                 inputHtml += '</li>';
 
@@ -69,7 +86,7 @@ $learningObjectivesCounter = count($learningObjectives);
 
                 inputHtml += '<div style="margin-bottom: -1em; margin-top: 1px;" class="longField required">';
                 inputHtml += '<label style="margin-top: 18px; height: 32px; float:left; margin-right: 0px;"> <?php echo __('Name') ?> :</label>';
-                inputHtml += '<input type="text" id="theLearningObjective' + id + 'Name" style="margin-top: 11px; margin-right: 11px; width:88%; float:right;" class="inLineInput" name="data[LearningObjective][' + id + '][description]">';
+                inputHtml += '<input type="text" id="theLearningObjective' + id + 'Name" style="margin-top: 11px; margin-right: 11px; width:86%; float:right;" class="inLineInput" name="data[LearningObjective][' + id + '][description]">';
                 inputHtml += '</div>';
 
                 inputHtml += '<div style="margin-bottom: -1em; margin-top: 45px; clear:both;" class="longField required">';
@@ -93,7 +110,7 @@ $learningObjectivesCounter = count($learningObjectives);
                 inputHtml += '</div>';
                 inputHtml += '</div>';
 
-                inputHtml += '<img id = "LearningObjective' + id + 'Name" src="../../webroot/img/delete-icon.png" class="delete-learning-objective" width="22" alt="Remove" border="0" style="margin-right: 37px;">';
+                inputHtml += '<img id = "LearningObjective' + id + 'Name" src="../../webroot/img/delete-icon.png" class="delete-learning-objective" width="22" alt="<?php echo __('Remove') ?>" border="0" style="margin-right: 37px;">';
 
                 inputHtml += '</li>';
 
@@ -191,7 +208,7 @@ $learningObjectivesCounter = count($learningObjectives);
                             $dataPt = $this->Html->tag('div', $dataPt, array('class' => 'inputsRow', 'id' => 'divTopic' . $i . 'Name'));
                             
                             
-                            $dataPt .= $this->Html->image('delete-icon.png', array('class' => 'delete-topic', 'alt' => __('Delete Topic'), 'border' => '0', 'style' => 'margin-right: 37px;', 'width' => '22', 'id' => 'Topic' . $i . 'Name'));
+                            $dataPt .= $this->Html->image('delete-icon.png', array('class' => 'delete-topic', 'alt' => __('Delete Topic'), 'border' => '0', 'style' => 'margin-right: 37px;', 'width' => '22', 'id' => 'Topic' . $i . 'Name', 'rel' => 'rightTooltip', 'title' => __('Remove')));
                             
                             echo $dataPt;
                             
@@ -255,14 +272,11 @@ $learningObjectivesCounter = count($learningObjectives);
                             
                             
                             $dataPt = $this->Html->tag('label', __('Name') . ':', array('style' => 'margin-top: 18px; height: 32px; float:left; margin-right: 0px;'));
-                            $dataPt .= $this->Form->input("LearningObjective.$i.description", array('label' => false, 'div' => false, 'class' => 'inLineInput', 'style' => 'margin-top: 11px; margin-right: 11px; width:88%; float:right;', 'id' => 'theLearningObjective' . $i . 'Description'));
-                            $dataPt .= $this->Form->hidden("LearningObjective.$i.id", array('value' => $topic['id']));
+                            $dataPt .= $this->Form->input("LearningObjective.$i.description", array('label' => false, 'div' => false, 'class' => 'inLineInput', 'style' => 'margin-top: 11px; margin-right: 11px; width:86%; float:right;', 'id' => 'theLearningObjective' . $i . 'Description'));
+                            $dataPt .= $this->Form->hidden("LearningObjective.$i.id", array('value' => $learningObjective['id']));
                             
                             $dataPt = $this->Html->tag('div', $dataPt, array('class' => 'longField required', 'style' => 'margin-bottom: -1em; margin-top: 1px;'));
-                            
-                            
-                            
-                             
+                                                                                                                 
 
                             $secondDiv = $this->Html->tag('label', __('Type') . ':', array('style' => 'margin-top: 18px; height: 32px; float:left; margin-right: 0px;'));
                             $secondDiv .= $this->Form->input("LearningObjective.$i.topic_type_id", array('label' => false, 'div' => false, 'class' => 'inLineList', 'style' => 'margin-top: 11px; height: 32px; float:left; margin-right: 11px;', 'id' => 'theLearningObjective' . $i . 'Type'));
@@ -276,7 +290,7 @@ $learningObjectivesCounter = count($learningObjectives);
                             
                             $dataPt = $this->Html->tag('div', $dataPt, array('class' => 'inputsRow', 'style' => 'height: 76px; clear:both;', 'id' => 'divLearningObjective' . $i . 'Name'));
                             
-                            $dataPt .= $this->Html->image('delete-icon.png', array('class' => 'delete-topic', 'alt' => __('Delete Topic'), 'border' => '0', 'style' => 'margin-right: 37px;', 'width' => '22', 'id' => 'Topic' . $i . 'Name'));
+                            $dataPt .= $this->Html->image('delete-icon.png', array('class' => 'delete-learning-objective', 'alt' => __('Delete Learning Objective'), 'border' => '0', 'style' => 'margin-right: 37px;', 'width' => '22', 'id' => 'LearningObjective' . $i . 'Name', 'rel' => 'rightTooltip', 'title' => __('Remove')));
                             
                             echo $dataPt;
                     
@@ -322,19 +336,19 @@ $learningObjectivesCounter = count($learningObjectives);
         ?>
     </fieldset>
 
-    <?php echo $this->Form->end(__('Submit')); ?>
+    <?php echo $this->Form->end(); ?>
 </div>
-<div class="actions">
-    <h3><?php echo __('Actions'); ?></h3>
-    <ul>
+<!--<div class="actions">-->
+    <!--<h3><?php echo __('Actions'); ?></h3>-->
+    <!--<ul>-->
 
-        <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Unit.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Unit.id'))); ?></li>
-        <li><?php echo $this->Html->link(__('List Units'), array('action' => 'index')); ?></li>
-        <li><?php echo $this->Html->link(__('List Knowledge Areas'), array('controller' => 'knowledge_areas', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('New Knowledge Area'), array('controller' => 'knowledge_areas', 'action' => 'add')); ?> </li>
-        <li><?php echo $this->Html->link(__('List Topics'), array('controller' => 'topics', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('New Topic'), array('controller' => 'topics', 'action' => 'add')); ?> </li>
-        <li><?php echo $this->Html->link(__('List Learning Objectives'), array('controller' => 'learning_objectives', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('New Learning Objective'), array('controller' => 'learning_objectives', 'action' => 'add')); ?> </li>
-    </ul>
-</div>
+        <!--<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Unit.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Unit.id'))); ?></li>-->
+        <!--<li><?php echo $this->Html->link(__('List Units'), array('action' => 'index')); ?></li>-->
+        <!--<li><?php echo $this->Html->link(__('List Knowledge Areas'), array('controller' => 'knowledge_areas', 'action' => 'index')); ?> </li>-->
+        <!--<li><?php echo $this->Html->link(__('New Knowledge Area'), array('controller' => 'knowledge_areas', 'action' => 'add')); ?> </li>-->
+        <!--<li><?php echo $this->Html->link(__('List Topics'), array('controller' => 'topics', 'action' => 'index')); ?> </li>-->
+        <!--<li><?php echo $this->Html->link(__('New Topic'), array('controller' => 'topics', 'action' => 'add')); ?> </li>-->
+        <!--<li><?php echo $this->Html->link(__('List Learning Objectives'), array('controller' => 'learning_objectives', 'action' => 'index')); ?> </li>-->
+        <!--<li><?php echo $this->Html->link(__('New Learning Objective'), array('controller' => 'learning_objectives', 'action' => 'add')); ?> </li>-->
+    <!--</ul>-->
+<!--</div>-->

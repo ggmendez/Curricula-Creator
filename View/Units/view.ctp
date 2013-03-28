@@ -1,5 +1,7 @@
 <?php // debug($requestData);       ?>
 
+<?php // debug($electiveTopic);  ?>
+
 <?php // debug($unit);  ?>
 
 <?php // debug($bodyKnowledge); ?>
@@ -9,13 +11,51 @@
 <?php echo $this->Html->addCrumb($unit['KnowledgeArea']['name'], '/knowledge_areas/view/' . $unit['KnowledgeArea']['id']); ?>
 <?php echo $this->Html->addCrumb($unit['Unit']['name']); ?>
 
+<div class="smallMenu">
+    <?php echo $this->Form->postLink($this->Html->image('delete-icon.png', array('style' => 'margin-left: 15px; float: right;', 'width' => 30, 'alt' => __('Delete'), 'border' => 0, 'rel' => 'tooltip', 'title' => __('Delete'))), array('action' => 'delete', $unit['Unit']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $unit['Unit']['id'])); ?>
+    <?php echo $this->Html->link($this->Html->image('edit-icon.png', array('style' => 'margin-left: 15px; float: right;', 'width' => 30, 'alt' => __('Edit'), 'border' => 0, 'rel' => 'tooltip', 'title' => __('Edit'))), array('action' => 'edit', $unit['Unit']['id']), array('escape' => false)); ?>
+    <?php echo $this->Html->link($this->Html->image('previous-icon.png', array('style' => 'margin-left: 15px; float: right;', 'width' => 30, 'alt' => __('Go back'), 'border' => 0, 'rel' => 'tooltip', 'title' => __('Go back'))), array('controller' => 'knowledge_areas', 'action' => 'view/' . $unit['KnowledgeArea']['id']), array('escape' => false)); ?>
+</div>
+
 <div class="units view">
 
     <?php // debug ($requestData); ?>
 
     <h2><?php echo h($unit['Unit']['name']); ?></h2>
-    <h4 style="text-align: center; color: #000"><?php echo '[<b>' . h($unit['Unit']['core_tier_1_hours']) . '</b> Core-Tier1 hours, <b>' . h($unit['Unit']['core_tier_2_hours']) . '</b> Core-Tier2 hours]'; ?></h4>
+    <!--<h4 style="text-align: center; color: #000"><?php echo '[<b>' . h($unit['Unit']['core_tier_1_hours']) . '</b> Core-Tier1 hours, <b>' . h($unit['Unit']['core_tier_2_hours']) . '</b> Core-Tier2 hours]'; ?></h4>-->
 
+    
+    
+    <?php echo $this->Html->tag('br'); ?>
+    <?php echo $this->Html->tag('h3', __('General Information') . ': '); ?>
+
+    <div style="padding-left: 20px;">
+
+        <?php echo $this->Html->tag('b', __('Knowledge Area') . ': ') . $this->Html->link($unit['KnowledgeArea']['name'], array('controller' => 'knowledge_areas', 'action' => 'view', $unit['KnowledgeArea']['id']), array('class' => 'simpleLink')); ?>
+        <?php echo $this->Html->tag('br'); ?>
+        <?php echo $this->Html->tag('br'); ?>
+        
+        <?php
+    $totalCore1 = $unit['Unit']['core_tier_1_hours'];
+    $totalCore2 = $unit['Unit']['core_tier_2_hours'];
+
+    if (!$totalCore1) {
+        $totalCore1 = 0;
+    }
+
+    if (!$totalCore2) {
+        $totalCore2 = 0;
+    }
+    ?>
+        
+        <?php echo $this->Html->tag('b', __('Core-Tier-1') . ': ') . $totalCore1 . ' ' . __('hours'); ?>
+        <?php echo $this->Html->tag('br'); ?>
+        <?php echo $this->Html->tag('br'); ?>
+        <?php echo $this->Html->tag('b', __('Core-Tier-2') . ': ') . $totalCore2 . ' ' . __('hours'); ?>
+
+    </div>
+    
+    <?php echo $this->Html->tag('br'); ?>
     <?php echo $this->Html->tag('br'); ?>
 
     <!--TOPICS-->
@@ -50,7 +90,7 @@
         foreach ($topicTypes as $topicType):
             $topicsGroup = $groupedTopics[$topicType['TopicType']['name']];
             if (!empty($topicsGroup)) {
-                echo $this->Html->tag('h4', $topicType['TopicType']['name'] . ':', array('style' => 'clear: both; margin-left: 20px;'));
+                echo $this->Html->tag('h4', __($topicType['TopicType']['name']) . ':', array('style' => 'clear: both; margin-left: 20px;'));
                 ?> <ol> <?php
                     foreach ($topicsGroup as $topic) {
                         echo $this->Html->tag('li', '<span>' . $topic['name'] . '</span>', array('style' => 'text-align: justify; margin-left: 30px;'));
@@ -60,12 +100,12 @@
             }
         endforeach;
 
-        echo $this->Html->tag('br');
+//        echo $this->Html->tag('br');
         echo $this->Html->tag('br');
     }
     ?>
 
-    <span style="clear:both; marging-top:20px;"></span>
+    <span style="clear:both; marging-top:10px;"></span>
 
     <?php
     echo $this->Html->tag('h3', __('Learning Objectives') . ':', array('style' => 'float:left;'));
@@ -106,7 +146,7 @@
         foreach ($topicTypes as $topicType):
             $learningObjectivesGroup = $groupedLearningObjectives[$topicType['TopicType']['name']];
             if (!empty($learningObjectivesGroup)) {
-                echo $this->Html->tag('h4', $topicType['TopicType']['name'] . ':', array('style' => 'clear: both; margin-left: 20px;'));
+                echo $this->Html->tag('h4', __($topicType['TopicType']['name']) . ':', array('style' => 'clear: both; margin-left: 20px;'));
                 ?> <ol> <?php
                     foreach ($learningObjectivesGroup as $learningObjective) {
                         echo $this->Html->tag('li', '<span>' . $learningObjective['description'] . ' <b>[</b><i>' . $indexedMasteryLevels[$learningObjective['mastery_level_id']]['MasteryLevel']['name'] . '</i><b>]</b> </span>', array('style' => 'text-align: justify; margin-left: 30px;'));
@@ -121,17 +161,17 @@
 
 
 </div>
-<div class="actions">
-    <h3><?php echo __('Actions'); ?></h3>
-    <ul>
-        <li><?php echo $this->Html->link(__('Edit Unit'), array('action' => 'edit', $unit['Unit']['id'])); ?> </li>
-        <li><?php echo $this->Html->link(__('Add Topic'), array('action' => 'add_topic', $unit['Unit']['id'])); ?> </li>
-        <li><?php echo $this->Html->link(__('Add Learning Objective'), array('action' => 'add_learning_objective', $unit['Unit']['id'])); ?> </li>
-        <li><?php echo $this->Form->postLink(__('Delete Unit'), array('action' => 'delete', $unit['Unit']['id']), null, __('Are you sure you want to delete # %s?', $unit['Unit']['id'])); ?> </li>
+<!--<div class="actions">-->
+    <!--<h3><?php echo __('Actions'); ?></h3>-->
+    <!--<ul>-->
+        <!--<li><?php echo $this->Html->link(__('Edit Unit'), array('action' => 'edit', $unit['Unit']['id'])); ?> </li>-->
+        <!--<li><?php echo $this->Html->link(__('Add Topic'), array('action' => 'add_topic', $unit['Unit']['id'])); ?> </li>-->
+        <!--<li><?php echo $this->Html->link(__('Add Learning Objective'), array('action' => 'add_learning_objective', $unit['Unit']['id'])); ?> </li>-->
+        <!--<li><?php echo $this->Form->postLink(__('Delete Unit'), array('action' => 'delete', $unit['Unit']['id']), null, __('Are you sure you want to delete # %s?', $unit['Unit']['id'])); ?> </li>-->
         
-        <li><?php // echo $this->Html->link(__('List Units'), array('action' => 'index')); ?> </li>
-        <li><?php // echo $this->Html->link(__('New Unit'), array('action' => 'add')); ?> </li>
-        <li><?php // echo $this->Html->link(__('List Knowledge Areas'), array('controller' => 'knowledge_areas', 'action' => 'index')); ?> </li>
-        <li><?php // echo $this->Html->link(__('New Knowledge Area'), array('controller' => 'knowledge_areas', 'action' => 'add')); ?> </li>
-    </ul>
-</div>
+        <!--<li><?php // echo $this->Html->link(__('List Units'), array('action' => 'index')); ?> </li>-->
+        <!--<li><?php // echo $this->Html->link(__('New Unit'), array('action' => 'add')); ?> </li>-->
+        <!--<li><?php // echo $this->Html->link(__('List Knowledge Areas'), array('controller' => 'knowledge_areas', 'action' => 'index')); ?> </li>-->
+        <!--<li><?php // echo $this->Html->link(__('New Knowledge Area'), array('controller' => 'knowledge_areas', 'action' => 'add')); ?> </li>-->
+    <!--</ul>-->
+<!--</div>-->

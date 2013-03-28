@@ -92,11 +92,13 @@ class CoursesController extends AppController {
 
             if ($this->Course->save($this->request->data)) {
                 $this->Session->setFlash(__('The course has been saved'));
+                
 // Writing a variable in the session object so that it can be read by any other method
 // $this->Session->write('key', $this->request->data);
+                
                 $this->redirect(array('action' => 'view' . '/' . $this->Course->id));
             } else {
-                $this->Session->setFlash(__('The course could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The course could not be saved. Please, see the messages below and try again.'));
             }
         }
         $areas = $this->Course->Area->find('list');
@@ -107,6 +109,30 @@ class CoursesController extends AppController {
         $users = $this->Course->User->find('list');
         $axes = $this->Course->Axis->find('list');
         $this->set(compact('areas', 'levels', 'subjects', 'types', 'implementationStrategies', 'users', 'axes'));
+    }
+    
+    function getRemovedObjectivesIDs ($id, $data) {
+        
+        $recievedIDs = array();
+        $recievedObjectives = $data['Objective'];
+        foreach ($recievedObjectives as $objective) {
+            array_push($recievedIDs, $objective['id']);
+        }
+        $this->Session->write('recievedIDs', $recievedIDs);
+
+        $storedIDs = array();
+        $options = array('conditions' => array('Objective.course_id' => $id));
+        $storedObjectives = $this->KnowledgeArea->Unit->find('all', $options);
+        foreach ($storedObjectives as $objective) {
+            array_push($storedIDs, $objective['Objective']['id']);
+        }
+        $this->Session->write('storedIDs', $storedIDs);
+
+        $removedIDs = array_diff($storedIDs, $recievedIDs);
+        $this->Session->write('removedIDs', $removedIDs);
+
+        return $removedIDs;
+    
     }
 
     /**
@@ -130,12 +156,18 @@ class CoursesController extends AppController {
                 'Objective.course_id' => $this->request->data['Course']['id']
             );
             $this->Course->Objective->deleteAll($options, true);
+            
+            
+            
+            $removedObjectivesIDs = $this->getRemovedObjectivesIDs($id, $this->request->data);
+            
+            
 
             if ($this->Course->saveAll($this->request->data)) {
                 $this->Session->setFlash(__('The course has been saved'));
                 $this->redirect(array('action' => 'view' . '/' . $this->request->data['Course']['id']));
             } else {
-                $this->Session->setFlash(__('The course could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The course could not be saved. Please, see the messages below and try again.'));
             }
         } else {
             $options = array('conditions' => array('Course.' . $this->Course->primaryKey => $id));
@@ -279,7 +311,7 @@ class CoursesController extends AppController {
                 $this->Session->setFlash(__('The course has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The course could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The course could not be saved. Please, see the messages below and try again.'));
             }
         }
         $areas = $this->Course->Area->find('list');
@@ -308,7 +340,7 @@ class CoursesController extends AppController {
                 $this->Session->setFlash(__('The course has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The course could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The course could not be saved. Please, see the messages below and try again.'));
             }
         } else {
             $options = array('conditions' => array('Course.' . $this->Course->primaryKey => $id));

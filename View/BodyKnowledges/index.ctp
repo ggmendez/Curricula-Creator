@@ -1,7 +1,11 @@
 <?php echo $this->Html->addCrumb(__('My Bodies of Knowledge')); ?>
 
+<div class="smallMenu">
+    <?php echo $this->Html->link($this->Html->image('add-icon.png', array('style' => 'float: right;', 'width' => 30, 'alt' => __('New'), 'border' => 0, 'rel' => 'tooltip', 'title' => __('New'))), array('controller' => 'bodyKnowledges', 'action' => 'add'), array('escape' => false)); ?>
+</div>
+
 <div class="bodyKnowledges index">
-    <h2><?php echo __('Bodies of Knowledge'); ?></h2>
+    <h2><?php echo __('My Bodies of Knowledge'); ?></h2>
     <table cellpadding="0" cellspacing="0">
         <tr>
             <!--<th><?php // echo $this->Paginator->sort('id');  ?></th>-->
@@ -14,7 +18,7 @@
                 <!--<td>-->
                 <?php // echo $this->Html->link($bodyKnowledge['BodyKnowledge']['id'], array('controller' => 'users', 'action' => 'view', $bodyKnowledge['User']['id'])); ?>
                 <!--</td>-->
-                <td style="text-align: left;"><?php echo $this->Html->link(h($bodyKnowledge['BodyKnowledge']['name']), array('action' => 'view', $bodyKnowledge['BodyKnowledge']['id']), array('class' => 'simpleLink', 'style' => 'padding-left: 5px;')) ?>&nbsp;</td>
+                <td style="text-align: left;"><?php echo $this->Html->link(h($bodyKnowledge['BodyKnowledge']['name']), array('action' => 'view', $bodyKnowledge['BodyKnowledge']['id']), array('class' => 'simpleLink', 'style' => 'padding-left: 5px;', 'rel' => 'tooltip', 'title' => __('Clic to view'))) ?>&nbsp;</td>
 
 
                 <?php
@@ -49,13 +53,13 @@ echo $this->Paginator->counter(array(
         ?>
     </div>
 </div>
-<div class="actions">
-    <h3><?php echo __('Actions'); ?></h3>
-    <ul>
-        <li><?php echo $this->Html->link(__('New Body of Knowledge'), array('action' => 'add')); ?></li>
+<!--<div class="actions">-->
+    <!--<h3><?php // echo __('Actions'); ?></h3>-->
+    <!--<ul>-->
+        <!--<li><?php // echo $this->Html->link(__('New Body of Knowledge'), array('action' => 'add')); ?></li>-->
         <!--<li><?php // echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index'));  ?> </li>-->
         <!--<li><?php // echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add'));  ?> </li>-->
         <!--<li><?php // echo $this->Html->link(__('List Units'), array('controller' => 'units', 'action' => 'index'));  ?> </li>-->
         <!--<li><?php // echo $this->Html->link(__('New Unit'), array('controller' => 'units', 'action' => 'add'));  ?> </li>-->
-    </ul>
-</div>
+    <!--</ul>-->
+<!--</div>-->

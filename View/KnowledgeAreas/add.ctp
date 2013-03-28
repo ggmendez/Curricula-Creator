@@ -12,7 +12,7 @@
         echo $this->Html->tag('div', $dataPt, array('class' => 'longField required'));
         ?>
     </fieldset>
-    <?php echo $this->Form->end(__('Submit')); ?>
+    <?php echo $this->Form->end(); ?>
 </div>
 <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>

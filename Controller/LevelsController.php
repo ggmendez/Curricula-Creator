@@ -44,7 +44,7 @@ class LevelsController extends AppController {
 				$this->Session->setFlash(__('The level has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The level could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The level could not be saved. Please, see the messages below and try again.'));
 			}
 		}
 	}
@@ -65,7 +65,7 @@ class LevelsController extends AppController {
 				$this->Session->setFlash(__('The level has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The level could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The level could not be saved. Please, see the messages below and try again.'));
 			}
 		} else {
 			$options = array('conditions' => array('Level.' . $this->Level->primaryKey => $id));
@@ -132,7 +132,7 @@ class LevelsController extends AppController {
 				$this->Session->setFlash(__('The level has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The level could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The level could not be saved. Please, see the messages below and try again.'));
 			}
 		}
 	}
@@ -153,7 +153,7 @@ class LevelsController extends AppController {
 				$this->Session->setFlash(__('The level has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The level could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The level could not be saved. Please, see the messages below and try again.'));
 			}
 		} else {
 			$options = array('conditions' => array('Level.' . $this->Level->primaryKey => $id));

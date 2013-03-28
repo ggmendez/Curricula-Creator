@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 3.5.7
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 18-03-2013 a las 03:29:42
+-- Tiempo de generación: 20-03-2013 a las 17:10:23
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.4.3
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `curricula`
+-- Base de datos: `devcurricula`
 --
 
 -- --------------------------------------------------------
@@ -114,28 +114,26 @@ CREATE TABLE IF NOT EXISTS `body_knowledges` (
   `description` text NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Volcado de datos para la tabla `body_knowledges`
 --
 
 INSERT INTO `body_knowledges` (`id`, `name`, `description`, `user_id`) VALUES
-(1, 'Computer Science Curricula 2013', 'CS2013 redefines the knowledge units in CS, rethinking the essentials necessary for a Computer 12 Science curriculum. It also seeks to identify exemplars of actual courses and programs to 13 provide concrete guidance on curricular structure and development in a variety of institutional 14 contexts.', 7),
 (2, 'CS2013', 'Bla bla bla', 3),
 (3, 'CS2013', 'Bla bla bla', 3),
 (4, 'aefa', 'ged', 3),
 (6, 'sdfs', 'sadsdafs', 3),
-(7, 'CS2008', 'dffdsfd', 7),
+(7, 'Computer Science Curricula 2008', 'The Review Task Force (RTF), commissioned by the ACM Education Board and the IEEE Computer Society Education Activities Board, was given a mandate to conduct an interim review of the Computer Science 2001 volume (hereafter referred to as CS2001) that had been published on 15th December, 2001. During the work on the CC2001 series of volumes, it was recognized that there was a need to produce curricular guidance for the community on a regular basis; this was interpreted as being roughly every 5 years. This is necessitated by the pace of change in the discipline and the consequent need to support the meaningful and effective evolution of programs of study.\r\n\r\nThe idea of an interim review was a new concept in the activities of ACM / Computer Society curricular guidance. It was not envisioned that a completely new set of curricular advice for Computer Science would be produced, but that the work on this occasion would absorb significantly less resources than a full review. Rather it had been anticipated that a variant of, or addendum to, the earlier document would be produced with significant matters being updated as necessary. Part of the mandate given to the RTF would involve carrying out a modest but hopefully effective consultation with the community, taking account of relevant industrial views. For instance, the structure might be expected to remain largely unaltered but the review would provide the opportunity to update the guidance and to address issues of concern to the community.', 7),
 (8, 'SDVFDVDFZ', 'DDFBDFBFD', 3),
-(9, 'CS2013', 'CS2013 redefines the knowledge units in CS, rethinking the essentials necessary for a Computer Science curriculum. It also seeks to identify exemplars of actual courses and programs to provide concrete guidance on curricular structure and development in a variety of institutional contexts.', 7),
-(10, 'Mi programa', 'sadfsadfsd', 7),
-(11, 'dsfgsfd', 'fdsdfdsf', 7),
+(9, 'Computer Science Curricula 2013', 'CS2013 redefines the knowledge units in CS, rethinking the essentials necessary for a Computer Science curriculum. It also seeks to identify exemplars of actual courses and programs to provide concrete guidance on curricular structure and development in a variety of institutional contexts.', 7),
 (12, 'sdfdas', 'dfdsfdf', 3),
 (13, 'Mi primer programa', 'Esta es la descripciÃ³n de un programa que estoy creando en este monento.', 7),
 (14, 'Este es uno de prueba', 'Esta es la descripciÃ³n de este cuerpo de aprendizaje.', 7),
 (15, 'Prueba', 'Esta es una prueba', 7),
-(16, 'Name of the Body of Knowledge', 'The description', 7);
+(16, 'Name of the Body of Knowledge', 'The description', 7),
+(17, 'Nuevo', 'xvzcvfdf', 7);
 
 -- --------------------------------------------------------
 
@@ -333,7 +331,7 @@ CREATE TABLE IF NOT EXISTS `knowledge_areas` (
   `abbreviation` varchar(20) NOT NULL,
   `body_knowledge_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=74 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=81 ;
 
 --
 -- Volcado de datos para la tabla `knowledge_areas`
@@ -374,26 +372,9 @@ INSERT INTO `knowledge_areas` (`id`, `name`, `description`, `abbreviation`, `bod
 (34, 'Systems Fundamentals', 'In previous curricular volumes, the interacting layers of a typical computing system, from hardware building blocks, to architectural organization, to operating system services, to application execution environments (particularly for parallel execution in a modern view of applications), were presented in independent knowledge units. The new Systems Fundamentals KA presents a unified systems perspective and common conceptual foundation for other KAs (notably Architecture and Organization, Network and Communications, Operating Systems, and Parallel and Distributed Algorithms). An organizational principle is â€œprogramming for performanceâ€: what a programmer needs to understand about the underlying system to achieve high performance, particularly in terms of exploiting parallelism.', 'SF', 9);
 INSERT INTO `knowledge_areas` (`id`, `name`, `description`, `abbreviation`, `body_knowledge_id`) VALUES
 (35, 'Social Issues and Professional Practice', 'While technical issues are central to the computing curriculum, they do not constitute a complete educational program in the field. Students must also be exposed to the larger societal context of computing to develop an understanding of the relevant social, ethical, legal and professional issues. This need to incorporate the study of these non-technical issues into the ACM curriculum was formally recognized in 1991, as can be seen from the following excerpt [Tucker91]: \r\n\r\nUndergraduates also need to understand the basic cultural, social, legal, and ethical issues inherent in the discipline of computing. They should understand where the discipline has been, where it is, and where it is heading. They should also understand their individual roles in this process, as well as appreciate the philosophical questions, technical problems, and aesthetic values that play an important part in the development of the discipline.\r\n\r\nStudents also need to develop the ability to ask serious questions about the social impact of computing and to evaluate proposed answers to those questions. Future practitioners must be able to anticipate the impact of introducing a given product into a given environment. Will that product enhance or degrade the quality of life? What will the impact be upon individuals, groups, and institutions?\r\n\r\nFinally, students need to be aware of the basic legal rights of software and hardware vendors and users, and they also need to appreciate the ethical values that are the basis for those rights. Future practitioners must understand the responsibility that they will bear, and the possible consequences of failure. They must understand their own limitations as well as the limitations of their tools. All practitioners must make a long-term commitment to remaining current in their chosen specialties and in the discipline of computing as a whole.\r\n\r\nAs technological advances continue to significantly impact the way we live and work, the critical importance of these social and professional issues continues to increase; new computer-based products and venues pose ever more challenging problems each year. It is our students who must enter the workforce and academia with intentional regard for the identification and resolution of these problems.\r\n\r\nComputer science educators may opt to deliver this core and elective material in stand-alone courses, integrated into traditional technical and theoretical courses, or as special units in capstone and professional practice courses. The material in this familiarity area is best covered through a combination of one required course along with short modules in other courses. On the one hand, some units listed as core tier-1â€”in particular, Social Context, Analytical Tools, Professional Ethics, and Intellectual Propertyâ€”do not readily lend themselves to being covered in other traditional courses. Without a standalone course, it is difficult to cover these topics appropriately. On the other hand, if ethical and social considerations are covered only in the standalone course and not â€œin context,â€ it will reinforce the false notion that technical processes are void of these other relevant issues. Because of this broad relevance, it is important that several traditional courses include modules that analyze the ethical, social and professional considerations in the context of the technical subject matter of the course. Courses in areas such as software engineering, databases, computer networks, computer security, and introduction to computing provide obvious context for analysis of ethical issues. However, an ethics-related module could be developed for almost any course in the curriculum. It would be explicitly against the spirit of the recommendations to have only a standalone course. Running through all of the issues in this area is the need to speak to the computer practitionerâ€™s responsibility to proactively address these issues by both moral and technical actions. The ethical issues discussed in any class should be directly related to and arise naturally from the subject matter of that class. Examples include a discussion in the database course of data aggregation or data mining, or a discussion in the software engineering course of the potential conflicts between obligations to the customer and obligations to the user and others affected by their work. Programming assignments built around applications such as controlling the movement of a laser during eye surgery can help to address the professional, ethical and social impacts of computing. Computing faculty who are unfamiliar with the content and/or pedagogy of applied ethics are urged to take advantage of the considerable resources from ACM, IEEE-CS, SIGCAS (special interest group 55 on computers and society), and other organizations. \r\n\r\nIt should be noted that the application of ethical analysis underlies every subsection of this Social and Professional knowledge area in computing. The ACM Code of Ethics and Professional Conduct - www.acm.org/about/code-of-ethics - provide guidelines that serve as the basis for the conduct of our professional work. The General Moral Imperatives provide an understanding of 60 our commitment to personal responsibility, professional conduct, and our leadership roles.', 'SP', 9),
-(36, 'Uo', 'Estoy editando la descripciÃ³n', 'u', 10),
-(37, 'dos', '', 'd', 10),
-(38, 'tres', '', 's', 10),
-(39, 'Uo', 'Esta es la descripciÃ³n de esta nota', 'u', 10),
-(40, 'xvfdfdsfd', '', 'fd', 10),
-(41, 'tres', '', 's', 10),
-(42, 'Uo', 'Esta es la descripciÃ³n de Mi Programa', 'u', 10),
-(43, 'dffdfdsffsfdsfd', 'Estoy aÃ±adiendo la descripciÃ³n de esta vaina.', 'dffd', 10),
-(44, 'tres', '', 's', 10),
-(45, 'Uo', '', 'u', 10),
-(46, 'Knowledge area uno', 'Esta es la descripciÃ³n de la primera knowledge area del programa "Mi Programa"', 'UN', 10),
-(47, 'tres', '', 's', 10),
-(48, 'sdfs', '', 'yy', 11),
-(49, 'rerere', '', 're', 11),
-(50, 'fdgffdfd', '', 'ii', 11),
 (51, 'Hola', '', 'HI', 12),
 (52, 'Chao', '', 'CH', 12),
 (53, 'Pepe', '', 'Pancho', 12),
-(54, 'Gonzalo', '', 'GM', 11),
-(55, 'Nueva Ã¡rea del conocimiento', '', 'NA', 11),
 (56, 'Una Ã¡rea de conocimiento', '', 'UNA', 13),
 (57, 'La segunda', '', 'DOS', 13),
 (58, 'La tercera', '', 'TRES', 13),
@@ -404,7 +385,10 @@ INSERT INTO `knowledge_areas` (`id`, `name`, `description`, `abbreviation`, `bod
 (64, 'Area dos de prueba', 'DescripciÃ­n de area dos', 'Dos', 15),
 (65, 'This is the name', '', 'ee', 16),
 (66, 'dvdvdvd', 'sdvadvadffds', '33', 16),
-(67, 'fffd', '', '44', 16);
+(67, 'fffd', '', '44', 16),
+(75, 'Uno', '', 'bb', 17),
+(78, 'cuatro', 'fghsgsdgdg', 'ffd', 17),
+(79, 'cinvo', 'gffggfdg', 'vf', 17);
 
 -- --------------------------------------------------------
 
@@ -419,7 +403,7 @@ CREATE TABLE IF NOT EXISTS `learning_objectives` (
   `topic_type_id` int(11) NOT NULL,
   `mastery_level_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=884 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1254 ;
 
 --
 -- Volcado de datos para la tabla `learning_objectives`
@@ -1235,27 +1219,59 @@ INSERT INTO `learning_objectives` (`id`, `description`, `unit_id`, `topic_type_i
 (860, 'dvd', 173, 0, 0),
 (861, 'fdsd', 173, 0, 0),
 (862, '', 173, 3, 0),
-(863, 'Explain what is meant by â€œbestâ€, â€œexpectedâ€, and â€œworstâ€ case behavior of an algorithm.', 154, 1, 1),
-(864, 'In the context of specific algorithms, identify the characteristics of data and/or other conditions or assumptions that lead to different behaviors.', 154, 1, 3),
-(865, 'Determine informally the time and space complexity of simple algorithms.', 154, 1, 2),
-(866, 'Understand the formal definition of big O.', 154, 1, 1),
-(867, 'List and contrast standard complexity classes.', 154, 1, 1),
-(868, 'Perform empirical studies to validate hypotheses about runtime stemming from mathematical analysis. Run algorithms on input of various sizes and compare performance.', 154, 1, 3),
-(869, 'Give examples that illustrate time-space trade-offs of algorithms.', 154, 1, 1),
-(870, 'Use big O notation formally to give asymptotic upper bounds on time and space complexity of algorithms.', 154, 2, 2),
-(871, 'Use big O notation formally to give expected case bounds on time complexity of algorithms.', 154, 2, 2),
-(872, 'Explain the use of big omega, big theta, and little o notation to describe the amount of work done by an algorithm.', 154, 2, 1),
-(873, 'Use recurrence relations to determine the time complexity of recursively defined algorithms.', 154, 2, 2),
-(874, 'Solve elementary recurrence relations, e.g., using some form of a Master Theorem.', 154, 2, 2),
-(875, 'For each of the above strategies, identify a practical example to which it would apply.', 157, 1, 1),
-(876, 'Have facility mapping pseudocode to implementation, implementing examples of algorithmic strategies from scratch, and applying them to specific problems.', 157, 1, 2),
-(877, 'Use a greedy approach to solve an appropriate problem and determine if the greedy rule chosen leads to an optimal solution.', 157, 1, 2),
-(878, 'Use a divide-and-conquer algorithm to solve an appropriate problem.', 157, 1, 2),
-(879, 'Use recursive backtracking to solve a problem such as navigating a maze.', 157, 1, 2),
-(880, 'Use dynamic programming to solve an appropriate problem.', 157, 1, 2),
-(881, 'Describe various heuristic problem-solving methods.', 157, 2, 1),
-(882, 'Use a heuristic approach to solve an appropriate problem.', 157, 2, 2),
-(883, 'Describe the trade-offs between brute force and other strategies.', 157, 2, 3);
+(889, 'Explain what is meant by â€œbestâ€, â€œexpectedâ€, and â€œworstâ€ case behavior of an algorithm.', 183, 1, 1),
+(890, 'In the context of specific algorithms, identify the characteristics of data and/or other conditions or assumptions that lead to different behaviors.', 183, 1, 3),
+(891, 'Determine informally the time and space complexity of simple algorithms.', 183, 1, 2),
+(892, 'Understand the formal definition of big O.', 183, 1, 1),
+(893, 'List and contrast standard complexity classes.', 183, 1, 1),
+(894, 'Perform empirical studies to validate hypotheses about runtime stemming from mathematical analysis. Run algorithms on input of various sizes and compare performance.', 183, 1, 3),
+(895, 'Give examples that illustrate time-space trade-offs of algorithms.', 183, 1, 1),
+(896, 'Use big O notation formally to give asymptotic upper bounds on time and space complexity of algorithms.', 183, 1, 2),
+(897, 'Use big O notation formally to give expected case bounds on time complexity of algorithms.', 183, 1, 2),
+(898, 'Explain the use of big omega, big theta, and little o notation to describe the amount of work done by an algorithm.', 183, 1, 1),
+(899, 'Use recurrence relations to determine the time complexity of recursively defined algorithms.', 183, 1, 2),
+(900, 'Solve elementary recurrence relations, e.g., using some form of a Master Theorem.', 183, 1, 2),
+(901, 'For each of the above strategies, identify a practical example to which it would apply.', 184, 1, 1),
+(902, 'Have facility mapping pseudocode to implementation, implementing examples of algorithmic strategies from scratch, and applying them to specific problems.', 184, 1, 2),
+(903, 'Use a greedy approach to solve an appropriate problem and determine if the greedy rule chosen leads to an optimal solution.', 184, 1, 2),
+(904, 'Use a divide-and-conquer algorithm to solve an appropriate problem.', 184, 1, 2),
+(905, 'Use recursive backtracking to solve a problem such as navigating a maze.', 184, 1, 2),
+(906, 'Use dynamic programming to solve an appropriate problem.', 184, 1, 2),
+(907, 'Describe various heuristic problem-solving methods.', 184, 2, 1),
+(908, 'Use a heuristic approach to solve an appropriate problem.', 184, 2, 2),
+(909, 'Describe the trade-offs between brute force and other strategies.', 184, 2, 3),
+(910, 'Implement basic numerical algorithms.', 185, 1, 2),
+(911, 'Implement simple search algorithms and explain the differences in their time complexities.', 185, 1, 3),
+(912, 'Be able to implement common quadratic and O(N log N) sorting algorithms.', 185, 1, 2),
+(913, 'nderstand the implementation of hash tables, including collision avoidance and resolution.', 185, 1, 1),
+(914, 'Discuss the runtime and memory efficiency of principal algorithms for sorting, searching, and hashing.', 185, 1, 1),
+(915, 'Discuss factors other than computational efficiency that influence the choice of algorithms, such as programming time, maintainability, and the use of application-specific patterns in the input data.', 185, 1, 1),
+(916, 'Solve problems using fundamental graph algorithms, including depth-first and breadth-first search.', 185, 1, 2),
+(917, 'Demonstrate the ability to evaluate algorithms, to select from a range of possible options, to provide justification for that selection, and to implement the algorithm in a particular context.', 185, 1, 3),
+(918, 'Understand the heap property and the use of heaps as an implementation of priority queues.', 185, 2, 1),
+(919, 'Solve problems using graph algorithms, including single-source and all-pairs shortest paths, and at least one minimum spanning tree algorithm.', 185, 2, 2),
+(920, 'Be able to implement a string-matching algorithm.', 185, 2, 2),
+(921, 'Discuss the concept of finite state machines.', 186, 1, 1),
+(922, 'Design a deterministic finite state machine to accept a specified language.', 186, 1, 2),
+(923, 'Generate a regular expression to represent a specified language.', 186, 1, 2),
+(924, 'Explain why the halting problem has no algorithmic solution.', 186, 1, 1),
+(925, 'Design a context-free grammar to represent a specified language.', 186, 2, 2),
+(926, 'Define the classes P and NP.', 186, 2, 1),
+(927, 'Explain the significance of NP-completeness.', 186, 2, 1),
+(928, 'Define the classes P and NP. (Also appears in AL/Basic Automata, Computability, and Complexity)', 187, 3, 1),
+(929, 'Define the P-space class and its relation to the EXP class.', 187, 3, 1),
+(930, 'Explain the significance of NP-completeness. (Also appears in AL/Basic Automata, Computability, and Complexity)', 187, 3, 1),
+(931, 'Provide examples of classic NP-complete problems.', 187, 3, 1),
+(932, 'Prove that a problem is NP-complete by reducing a classic known NP-complete problem to it.', 187, 3, 2),
+(945, 'Understand the mapping of real-world problems to algorithmic solutions (e.g., as graph problems, linear programs, etc.)', 190, 3, 2),
+(946, 'Use advanced algorithmic techniques (e.g., randomization, approximation) to solve real problems.', 190, 3, 3),
+(947, 'Apply advanced analysis techniques (e.g., amortized, probabilistic, etc.) to algorithms.', 190, 3, 3),
+(1247, 'Prove that a language is in a specified class and that it is not in the next lower class.', 189, 3, 3),
+(1249, 'Convert among equivalently powerful notations for a language, including among DFAs, NFAs, and regular expressions, and between PDAs and CFGs.', 189, 3, 2),
+(1250, 'Explain the Church-Turing thesis and its significance.', 189, 3, 1),
+(1251, 'Explain Riceâ€™s Theorem and its significance.', 189, 3, 1),
+(1252, 'Provide examples of uncomputable functions.', 189, 3, 1),
+(1253, 'Prove that a problem is uncomputable by reducing a classic known uncomputable problem to it.', 189, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -1421,7 +1437,7 @@ CREATE TABLE IF NOT EXISTS `topics` (
   `name` varchar(500) NOT NULL,
   `topic_type_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1179 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1261 ;
 
 --
 -- Volcado de datos para la tabla `topics`
@@ -2552,25 +2568,78 @@ INSERT INTO `topics` (`id`, `unit_id`, `name`, `topic_type_id`) VALUES
 (1157, 173, 'Mi topico', 1),
 (1158, 173, 'Otro tÃ³pico', 2),
 (1159, 173, 'Pancho', 1),
-(1160, 154, 'Differences among best, expected, and worst case behaviors of an algorithm', 1),
-(1161, 154, 'Asymptotic analysis of upper and expected complexity bounds', 1),
-(1162, 154, 'Big O notation: formal definition', 1),
-(1163, 154, 'Complexity classes, such as constant, logarithmic, linear, quadratic, and exponential', 1),
-(1164, 154, 'Empirical measurements of performance', 1),
-(1165, 154, 'Time and space trade-offs in algorithms', 1),
-(1166, 154, 'Big O notation: use', 2),
-(1167, 154, 'Little o, big omega and big theta notation', 2),
-(1168, 154, 'Recurrence relations', 2),
-(1169, 154, 'Analysis of iterative and recursive algorithms', 2),
-(1170, 154, 'Some version of a Master Theorem', 2),
-(1171, 157, 'Brute-force algorithms', 1),
-(1172, 157, 'Greedy algorithms', 1),
-(1173, 157, 'Divide-and-conquer (cross-reference SDF/Algorithms and Design/Problem-solving strategies)', 1),
-(1174, 157, 'Recursive backtracking', 1),
-(1175, 157, 'Dynamic Programming', 1),
-(1176, 157, 'Branch-and-bound', 2),
-(1177, 157, 'Heuristics', 2),
-(1178, 157, 'Reduction: transform-and-conquer', 2);
+(1185, 183, 'Differences among best, expected, and worst case behaviors of an algorithm', 1),
+(1186, 183, 'Asymptotic analysis of upper and expected complexity bounds', 1),
+(1187, 183, 'Big O notation: formal definition', 1),
+(1188, 183, 'Complexity classes, such as constant, logarithmic, linear, quadratic, and exponential', 1),
+(1189, 183, 'Empirical measurements of performance', 1),
+(1190, 183, 'Time and space trade-offs in algorithms', 1),
+(1191, 183, 'Big O notation: use', 2),
+(1192, 183, 'Little o, big omega and big theta notation', 2),
+(1193, 183, 'Recurrence relations', 2),
+(1194, 183, 'Analysis of iterative and recursive algorithms', 2),
+(1195, 183, 'Some version of a Master Theorem', 2),
+(1196, 184, 'Brute-force algorithms', 1),
+(1197, 184, 'Greedy algorithms', 1),
+(1198, 184, 'Divide-and-conquer (cross-reference SDF/Algorithms and Design/Problem-solving strategies)', 1),
+(1199, 184, 'Recursive backtracking', 1),
+(1200, 184, 'Dynamic Programming', 1),
+(1201, 184, 'Branch-and-bound', 2),
+(1202, 184, 'Heuristics', 2),
+(1203, 184, 'Reduction: transform-and-conquer', 2),
+(1204, 185, 'Simple numerical algorithms, such as computing the average of a list of numbers, finding the min, max, and mode in a list, approximating the square root of a number, or finding the greatest common divisor', 1),
+(1205, 185, 'Sequential and binary search algorithms', 1),
+(1206, 185, 'Worst case quadratic sorting algorithms (selection, insertion)', 1),
+(1207, 185, 'Worst or average case O(N log N) sorting algorithms (quicksort, heapsort, mergesort)', 1),
+(1208, 185, 'Hash tables, including strategies for avoiding and resolving collisions', 1),
+(1209, 185, 'Binary search trees: Common operations on binary search trees such as select min, max, insert, delete, iterate over tree', 1),
+(1210, 185, 'Graphs and graph algorithms: Representations of graphs (e.g., adjacency list, adjacency matrix)', 1),
+(1211, 185, 'Graphs and graph algorithms: Depth- and breadth-first traversals', 1),
+(1212, 185, 'Heaps', 2),
+(1213, 185, 'Graphs and graph algorithms: Shortest-path algorithms (Dijkstraâ€™s and Floydâ€™s algorithms)', 2),
+(1214, 185, 'Graphs and graph algorithms: Minimum spanning tree (Primâ€™s and Kruskalâ€™s algorithms)', 1),
+(1215, 185, 'Pattern matching and string/text algorithms (e.g., substring matching, regular expression matching, longest common subsequence algorithms)', 1),
+(1216, 186, 'Finite-state machines', 1),
+(1217, 186, 'Regular expressions', 1),
+(1218, 186, 'The halting problem', 1),
+(1219, 186, 'Context-free grammars (cross-reference PL/Syntax Analysis)', 2),
+(1220, 186, 'Introduction to the P and NP classes and the P vs NP problem', 2),
+(1221, 186, 'Introduction to the NP-complete class and exemplary NP-complete problems (e.g., SAT, Knapsack)', 2),
+(1222, 187, 'Review definitions of the classes P and NP; introduce P-space and EXP', 3),
+(1223, 187, 'NP-completeness (Cookâ€™s theorem)', 3),
+(1224, 187, 'Classic NP-complete problems', 3),
+(1225, 187, 'Reduction Techniques', 3),
+(1230, 189, 'Sets and languages', 3),
+(1231, 189, 'Regular languages: Review of deterministic finite automata (DFAs)', 3),
+(1232, 189, 'Regular languages: Nondeterministic finite automata (NFAs)', 3),
+(1233, 189, 'Regular languages: Equivalence of DFAs and NFAs', 3),
+(1234, 189, 'Regular languages: Review of regular expressions; their equivalence to finite automata', 3),
+(1235, 189, 'Regular languages: Closure properties', 3),
+(1236, 189, 'Regular languages: Proving languages non-regular, via the pumping lemma or alternative means', 3),
+(1237, 189, 'Context-free languages: Push-down automata (PDAs)', 3),
+(1238, 189, 'Context-free languages: Relationship of PDAs and context-free grammars', 3),
+(1239, 189, 'Context-free languages: Properties of context-free languages', 3),
+(1240, 189, 'Turing machines, or an equivalent formal model of universal computation', 3),
+(1241, 189, 'Nondeterministic Turing machines', 3),
+(1242, 189, 'Chomsky hierarchy', 3),
+(1243, 189, 'The Church-Turing thesis', 3),
+(1244, 189, 'Computability', 3),
+(1245, 189, 'Riceâ€™s Theorem', 3),
+(1246, 189, 'Examples of uncomputable functions', 3),
+(1247, 189, 'Implications of uncomputability', 3),
+(1248, 190, 'Balanced trees (e.g., AVL trees, red-black trees, splay trees, treaps)', 3),
+(1249, 190, 'Graphs (e.g., topological sort, finding strongly connected components, matching)', 3),
+(1250, 190, 'Advanced data structures (e.g., B-trees, Fibonacci heaps)', 3),
+(1251, 190, 'String-based data structures and algorithms (e.g., suffix arrays, suffix trees, tries)', 3),
+(1252, 190, 'Network flows (e.g., max flow [Ford-Fulkerson algorithm], max flow â€“ min cut, maximum bipartite  matching)', 3),
+(1253, 190, 'Linear Programming (e.g., duality, simplex method, interior point algorithms)', 3),
+(1254, 190, 'Number-theoretic algorithms (e.g., modular arithmetic, primality testing, integer factorization)', 3),
+(1255, 190, 'Geometric algorithms (e.g., points, line segments, polygons [properties, intersections], finding convex hull, spatial decomposition, collision detection, geometric search/proximity)', 3),
+(1256, 190, 'Randomized algorithms', 3),
+(1257, 190, 'Approximation algorithms', 3),
+(1258, 190, 'Amortized analysis', 3),
+(1259, 190, 'Probabilistic analysis', 3),
+(1260, 190, 'Online algorithms and competitive analysis', 3);
 
 -- --------------------------------------------------------
 
@@ -2629,7 +2698,7 @@ CREATE TABLE IF NOT EXISTS `units` (
   `core_tier_2_hours` int(11) NOT NULL,
   `includes_electives` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=174 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=191 ;
 
 --
 -- Volcado de datos para la tabla `units`
@@ -2789,21 +2858,21 @@ INSERT INTO `units` (`id`, `user_id`, `name`, `knowledge_area_id`, `hours`, `cor
 (151, 7, 'Nueva Unidad', 34, 0, 1, 3, 'Yes'),
 (152, 7, 'Segunda Unidad de esta nota', 34, 0, 2, 3, 'Yes'),
 (153, 7, 'Una tercera unidad', 34, 0, 1, 3, 'Yes'),
-(154, 7, 'Basic Analysis', 18, 0, 2, 2, 'No'),
 (155, 7, 'sfasfasdfdas', 62, 0, 3, 3, 'Yes'),
 (156, 7, 'asfsafsdsdsdsad', 62, 0, 4, 4, 'Yes'),
-(157, 7, 'Algorithmic Strategies', 18, 0, 5, 1, 'No'),
-(158, 7, 'Fundamental Data Structures and Algorithms', 18, 0, 9, 3, 'No'),
-(159, 7, 'Basic Automata, Computability and Complexity', 18, 0, 3, 3, 'No'),
-(160, 7, 'Advanced Computational Complexity', 18, 0, 0, 0, 'Yes'),
-(161, 7, 'Advanced Automata Theory and Computability', 18, 0, 0, 0, 'Yes'),
-(162, 7, 'Advanced Data Structures, Algorithms, and Analysis', 18, 0, 0, 0, 'Yes'),
 (163, 7, 'Nueva unidad', 1, 0, 28, 8, 'Yes'),
 (164, 7, 'Pepe', 1, 0, 1, 5, 'Yes'),
 (165, 7, 'SDFDADFADFAD', 1, 0, 3, 3, 'Yes'),
 (166, 7, 'SDDFSSFDSFDSFD', 1, 0, 2, 3, 'Yes'),
 (167, 7, 'sdfdsdfsds', 1, 0, 2, 3, 'Yes'),
-(169, 7, 'Nombre de la unidad nueva', 1, 0, 2, 2, 'Yes');
+(169, 7, 'Nombre de la unidad nueva', 1, 0, 2, 2, 'Yes'),
+(183, 7, 'Basic Analysis', 18, 0, 2, 2, ''),
+(184, 7, 'Algorithmic Strategies', 18, 0, 5, 1, ''),
+(185, 7, 'Fundamental Data Structures and Algorithms', 18, 0, 9, 3, ''),
+(186, 7, 'Basic Automata Computability and Complexity', 18, 0, 3, 3, ''),
+(187, 7, 'Advanced Computational Complexity', 18, 0, 0, 0, ''),
+(189, 7, 'Advanced Automata Theory and Computability', 18, 0, 0, 0, ''),
+(190, 7, 'Advanced Data Structures Algorithms and Analysis', 18, 0, 0, 0, '');
 
 -- --------------------------------------------------------
 

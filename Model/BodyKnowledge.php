@@ -44,7 +44,7 @@ class BodyKnowledge extends AppModel {
         'name' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
-            //'message' => 'Your custom message here',
+            'message' => 'The name of the Body Knowledge can not be empty',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule

@@ -46,7 +46,7 @@ class ObjectivesController extends AppController {
                 $this->Session->setFlash(__('The objective has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The objective could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The objective could not be saved. Please, see the messages below and try again.'));
             }
         }
         $courses = $this->Objective->Course->find('list');
@@ -80,7 +80,7 @@ class ObjectivesController extends AppController {
                 $this->Session->setFlash(__('The objective has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The objective could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The objective could not be saved. Please, see the messages below and try again.'));
             }
         } else {
             $options = array('conditions' => array('Objective.' . $this->Objective->primaryKey => $id));
@@ -149,7 +149,7 @@ class ObjectivesController extends AppController {
                 $this->Session->setFlash(__('The objective has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The objective could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The objective could not be saved. Please, see the messages below and try again.'));
             }
         }
         $courses = $this->Objective->Course->find('list');
@@ -172,7 +172,7 @@ class ObjectivesController extends AppController {
                 $this->Session->setFlash(__('The objective has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The objective could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The objective could not be saved. Please, see the messages below and try again.'));
             }
         } else {
             $options = array('conditions' => array('Objective.' . $this->Objective->primaryKey => $id));

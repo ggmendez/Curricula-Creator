@@ -58,7 +58,7 @@ class TopicsController extends AppController {
                 $this->Session->setFlash(__('The topic has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The topic could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The topic could not be saved. Please, see the messages below and try again.'));
             }
         }
         
@@ -85,7 +85,7 @@ class TopicsController extends AppController {
                 $this->Session->setFlash(__('The topic has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The topic could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The topic could not be saved. Please, see the messages below and try again.'));
             }
         } else {
             $options = array('conditions' => array('Topic.' . $this->Topic->primaryKey => $id));
@@ -154,7 +154,7 @@ class TopicsController extends AppController {
                 $this->Session->setFlash(__('The topic has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The topic could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The topic could not be saved. Please, see the messages below and try again.'));
             }
         }
         $units = $this->Topic->Unit->find('list');
@@ -177,7 +177,7 @@ class TopicsController extends AppController {
                 $this->Session->setFlash(__('The topic has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The topic could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The topic could not be saved. Please, see the messages below and try again.'));
             }
         } else {
             $options = array('conditions' => array('Topic.' . $this->Topic->primaryKey => $id));

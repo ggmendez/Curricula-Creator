@@ -341,3 +341,7 @@ Cache::config('_cake_model_', array(
 	'serialize' => ($engine === 'File'),
 	'duration' => $duration
 ));
+
+
+// Setting the default language to English
+Configure::write('Config.language', 'eng');
